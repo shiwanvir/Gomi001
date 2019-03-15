@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "635585310051",
+    "firebase_url": "https://gomi001-6b197.firebaseio.com",
+    "project_id": "gomi001-6b197",
+    "storage_bucket": "gomi001-6b197.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635585310051:android:3896932e483eab04",
+        "android_client_info": {
+          "package_name": "info.gomi.gomi001"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "635585310051-ujdcmdnkth5u2efv0iucjf03c3i2dm5f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.gomi.gomi001",
+            "certificate_hash": "ff2dfeb3c27d2e3e213c4505f98a08f9fb4ce7c7"
+          }
+        },
+        {
+          "client_id": "635585310051-bdfmdeb5hc53ol1kj1isnghq0dpjp6m5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjdmsEtYZ0s2l1FN-sKFeeXK2FL_8KOdk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "635585310051-bdfmdeb5hc53ol1kj1isnghq0dpjp6m5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

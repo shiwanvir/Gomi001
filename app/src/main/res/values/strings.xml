@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Gomi001</string>.
+    <string name="contact_form">Contact Us</string>
+    <string name="contact_form_name">Name</string>
+    <string name="phone_no">Phone No</string>
+    <string name="item_name">Item Name</string>
+    <string name="item_type">Item Type</string>
+    <string name="contact_form_button">Send Message</string>
+    <string name="from_gallary">Gallary</string>
+    <string name="from_camera">Camera</string>
+    <string name="price">Price</string>
+    <string name="location">Location</string>
+    <string-array name="names">
+        <item>Iorn Materials</item>
+        <item>Empty Bottles</item>
+        <item>Papers</item>
+        <item>Other</item>
+
+    </string-array>
+    <string name="image">Image</string>
+    <string name="contact_form_post_message">Please wait! We\'re sending your message to the support department...</string>
+    <string name="contact_posted">Your message has been successfully delivered.</string>
+    <string name="appbar_scrolling_view_behavior">kkkkkk</string>
+    <string name="title_activity_seller_map">Map</string>
+    <string name="save_details"> Post Ad.</string>
+    <string name="title_activity_driver_map">Map</string>
+    <string name="dump_waste">Dump Waste</string>
+
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorBlue">#4542f4</color>
+    <color name="colorOrange">#f4a941</color>
+    <color name="colorGreen"> #88f441</color>
+    <color name="colorFormMasterDivider">#DDDDDD</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorFormMasterElementTextTitle">#222222</color>
+    <color name="formColor">#f4aa42</color>
+
+</resources>

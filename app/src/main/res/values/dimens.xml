@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="headerTextSize">15sp</dimen>
+    <dimen name="elementTextTitleSize">14sp</dimen>
+    <dimen name="elementTextValueSize">13sp</dimen>
+   <dimen name="activity_horizontal_margin">13sp</dimen>
+    <dimen name="appbar_scrolling_view_behavior">13sp</dimen>
+    <dimen name="activity_vertical_margin">13sp</dimen>
+
+</resources>
