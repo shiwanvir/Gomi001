@@ -1,5 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DriverMapActivity">
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/star_journey"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="40dp"
+        android:paddingBottom="1dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="1dp"
+        android:text="@string/start_journey"
+        android:textAllCaps="true"
+        android:layout_alignParentRight="true"
+        android:textColor="@android:color/white"
+        android:textSize="13sp"/>
+
+    <Button
+        android:id="@+id/pick_up_waste"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimary"
+        android:paddingBottom="1dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="1dp"
+        android:text="@string/pick_up_waste"
+        android:textAllCaps="true"
+        android:layout_alignParentRight="true"
+        android:textColor="@android:color/white"
+        android:textSize="13sp"/>
+
+   <fragment
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/map"
@@ -7,3 +47,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DriverMapActivity" />
+    </FrameLayout>

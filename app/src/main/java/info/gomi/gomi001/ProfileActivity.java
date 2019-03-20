@@ -27,13 +27,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if(firebaseAuth.getCurrentUser()==null){
             finish();
             //when user not logeed
-            startActivity(new Intent(this,LoginActivity.class));
+            startActivity(new Intent(this,MainActivity.class));
 
         }
             FirebaseUser user=firebaseAuth.getCurrentUser();
 
         textViewUserEmail=(TextView) findViewById(R.id.textViewUserEmail);
-        textViewUserEmail.setText("Welcome"+user.getEmail());
+        textViewUserEmail.setText("Welcome "+user.getEmail());
         buttonLogout=(Button)findViewById(R.id.buttonLogout);
         buttonLogout.setOnClickListener(this);
 
@@ -44,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if(view == buttonLogout){
             firebaseAuth.signOut();
             finish();
-            startActivity(new Intent(this,LoginActivity.class));
+            startActivity(new Intent(this,MainActivity.class));
         }
     }
 }
