@@ -11,6 +11,8 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.util.Pools;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -32,6 +34,7 @@ public class SellerMapActivity extends FragmentActivity implements OnMapReadyCal
     public static double latitude;
     public  static double  longitude;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,7 @@ public class SellerMapActivity extends FragmentActivity implements OnMapReadyCal
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
 
 
     }
@@ -100,8 +104,6 @@ public class SellerMapActivity extends FragmentActivity implements OnMapReadyCal
         //Log.d("value of langitude is ", String.valueOf(mLastLocation.getLatitude()));
         latitude=mLastLocation.getLatitude();
         longitude=mLastLocation.getLongitude();
-
-
 
 
     }

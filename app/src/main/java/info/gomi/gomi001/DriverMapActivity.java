@@ -80,9 +80,11 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
         pickUpWaste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PickWaste();
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);
+
             }
         });
 
@@ -99,6 +101,19 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
                 getRouterToMaker(nearstDumpedLocation);
             }
         });
+    }
+
+    private void PickWaste() {
+
+        DatabaseReference picWaste=FirebaseDatabase.getInstance().getReference().child("dumpWaste");
+        GeoFire geoFirePicwaste=new GeoFire(picWaste);
+        DatabaseReference pickedWaste=FirebaseDatabase.getInstance().getReference().child("pickedWaste");
+        GeoFire geoFirePickedwaste=new GeoFire(pickedWaste);
+
+        geoFirePicwaste.removeLocation(nearestUserId);
+        geoFirePickedwaste.setLocation(nearestUserId,new GeoLocation(mLastLocation.getLatitude(),mLastLocation.getLongitude()));
+
+
     }
 
     private void getRouterToMaker(LatLng nearstDumpedLocation) {
@@ -205,6 +220,7 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
 
 
     public int wastePackages=0;
+    public String nearestUserId="";
     List<Marker> markerList =new ArrayList<Marker>();
     private void getDumpedwasteAround(){
         minDistance=1000000000;
@@ -242,6 +258,7 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
                 float distance=dumPoint.distanceTo(driverLoc);
                if(minDistance>distance){
                     minDistance=distance;
+                    nearestUserId=key;
                   // nLocation.setLongitude(wateLocatrion.latitude);
                    //nLocation.setLongitude(wateLocatrion.longitude);
                    nearstDumpedLocation=new LatLng(dumPoint.getLatitude(),dumPoint.getLongitude());
@@ -250,12 +267,14 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
                 else{
 
                     minDistance=minDistance;
+                    nearestUserId=nearestUserId;
                    //nearstDumpedLocation.setLongitude(wateLocatrion.latitude);
                    //nearstDumpedLocation.setLongitude(wateLocatrion.longitude);
                    nearstDumpedLocation=new LatLng(nearstDumpedLocation.latitude,nearstDumpedLocation.longitude);
                 }
                 Log.i("Distance", "Distance" + distance);
                 Log.i(" Min Distance", "Min Distance" + minDistance);
+                Log.i("Nearest User Id:", "Neasrt User Id:" +nearestUserId);
                 Log.i("this", "Number of waste packges" + markerList.size());
                 Log.i("waste location:", "latiude" +nearstDumpedLocation.latitude );
                 Log.i("waste location:", "longitude" +nearstDumpedLocation.longitude );

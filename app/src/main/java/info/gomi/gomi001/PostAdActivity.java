@@ -3,14 +3,17 @@ package info.gomi.gomi001;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +26,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,18 +42,22 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import info.gomi.gomi001.SellerMapActivity;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
-public class PostAdActivity extends AppCompatActivity implements View.OnClickListener   {
+public class PostAdActivity extends AppCompatActivity implements View.OnClickListener {
     Button from_camera;
+    Button from_gllary;
     Button seller_location;
     Button details_save;
     ImageView image;
@@ -64,18 +74,38 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
     private Class<SellerMapActivity> sellerMapActivityClass;
     DatabaseReference saveDeatils;
     FirebaseStorage storage;
+    Location mLastLocation;
     StorageReference storageReference;
+    private FusedLocationProviderClient fusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_ad);
-       //Firebase stoage int
-       storage= FirebaseStorage.getInstance();
-       storageReference=storage.getReference();
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        //Firebase stoage int
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        //LatLng wateLocatrion =new LatLng(location.latitude,location.longitude);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
+            return;
+        }
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    loc_latitude.setText(Double.toString(location.getLatitude()));
+                    loc_longitude.setText(Double.toString(location.getLongitude()));
+                }
+            }
+        });
+       //loc_latitude.setText(Double.toString(mLastLocation.getLatitude()));
+       //loc_longitude.setText(Double.toString(mLastLocation.getLongitude()));
         saveDeatils= FirebaseDatabase.getInstance().getReference("post_ad_details");
         from_camera=findViewById(R.id.from_camera);
+        from_gllary=findViewById(R.id.from_gallary);
         seller_location=(Button) findViewById(R.id.see_location);
         details_save=(Button) findViewById(R.id.save_details);
         username=(EditText) findViewById(R.id.your_name);
@@ -115,6 +145,15 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
                  dispatchPictureTakerAction();
             }
         });
+
+        from_gllary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent,1);
+            }
+        });
         image=findViewById(R.id.iamge);
 
 
@@ -122,9 +161,9 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
 
     private void addDetails() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-      String userId=user.getUid();
+      final String userId=user.getUid();
       String userName=username.getText().toString().trim();
-      String addId=saveDeatils.push().getKey();
+      final String addId=saveDeatils.push().getKey();
       String phoneNO=phoneNo.getText().toString().trim();
       String item=itemName.getText().toString().trim();
       String itemtype=itemType.getSelectedItem().toString();
@@ -137,7 +176,7 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
 
         saveDeatils.child(addId).setValue(adDetails);
         if(imageUri!=null){
-                final ProgressDialog progressDialog=new ProgressDialog(this);
+               /* final ProgressDialog progressDialog=new ProgressDialog(this);
             StorageReference ref=storageReference.child("images/"+ addId);
             ref.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -158,11 +197,48 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
                             double progress=(100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
                             progressDialog.setMessage("upload.."+(int)progress+"%");
                         }
+                    });*/
+
+            final StorageReference filepath=FirebaseStorage.getInstance().getReference().child("images").child(addId);
+            Bitmap bitmap=null;
+            try {
+                bitmap =MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(),imageUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            ByteArrayOutputStream baos=new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG,20,baos);
+            byte[] data=baos.toByteArray();
+            UploadTask uploadTask=filepath.putBytes(data);
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Map newImage = new HashMap();
+                            newImage.put("adImageUrl", uri.toString());
+                            saveDeatils.child(addId).updateChildren(newImage);
+
+                            //Toast.makeText(this,"Ad posted Sucessfully....",Toast.LENGTH_LONG).show();
+                            //finish();
+                            //return;
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            //finish();
+                            //return;
+                        }
                     });
+                }
+            });
+
         }
 
-
-       // Toast.makeText(this,"Ad posted Sucessfully....",Toast.LENGTH_LONG).show();
+        //finish();
+        Toast.makeText(this,"Ad posted Sucessfully....",Toast.LENGTH_LONG).show();
     }
 
 
@@ -215,11 +291,7 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         startActivity(new Intent(getApplicationContext(),SellerMapActivity.class));
-       double lati=SellerMapActivity.latitude;
-       double longi=SellerMapActivity.longitude;
 
-       loc_latitude.setText(Double.toString(lati));
-       loc_longitude.setText(Double.toString(longi));
 
     }
 }
