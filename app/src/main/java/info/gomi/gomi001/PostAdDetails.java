@@ -12,14 +12,18 @@ public class PostAdDetails {
     String latitide;
     String longtide;
     String adStatus;
+    String search;
+    String buyerId;
 
-
-    public PostAdDetails() {
-
-
+    public String getBuyerId() {
+        return buyerId;
     }
 
-    public PostAdDetails(String userId, String postAdId, String userName, String phoneNo, String itemName, String itemType, String price, String image, String latitide, String longtide, String adStatus) {
+    public void setBuyerId(String buyerId) {
+        this.buyerId = buyerId;
+    }
+
+    public PostAdDetails(String userId, String postAdId, String userName, String phoneNo, String itemName, String itemType, String price, String image, String latitide, String longtide, String adStatus, String search, String buyerId) {
         this.userId = userId;
         this.postAdId = postAdId;
         this.userName = userName;
@@ -31,6 +35,28 @@ public class PostAdDetails {
         this.latitide = latitide;
         this.longtide = longtide;
         this.adStatus = adStatus;
+        this.search = search;
+        this.buyerId = buyerId;
+    }
+
+    public PostAdDetails() {
+
+
+    }
+
+    public PostAdDetails(String userId, String postAdId, String userName, String phoneNo, String itemName, String itemType, String price, String image, String latitide, String longtide, String adStatus,String search) {
+        this.userId = userId;
+        this.postAdId = postAdId;
+        this.userName = userName;
+        this.phoneNo = phoneNo;
+        this.itemName = itemName;
+        this.itemType = itemType;
+        this.price = price;
+        this.image = image;
+        this.latitide = latitide;
+        this.longtide = longtide;
+        this.adStatus = adStatus;
+        this.search=search;
     }
 
     public String getUserId() {
@@ -76,5 +102,6 @@ public class PostAdDetails {
     public String getAdStatus() {
         return adStatus;
     }
+    public String getSearch(){return  search;}
 }
 

@@ -25,6 +25,8 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -32,9 +34,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 
-import static info.gomi.gomi001.SearchAdActivity.GetAdDetailsViewHolder.*;
-
-public class SearchAdActivity extends AppCompatActivity {
+public class MyAdsActivity extends AppCompatActivity {
     LinearLayoutManager mLayoutManager;//for sorting purposes
     SharedPreferences mSharedPref;//for saving sort settings
     RecyclerView mRecylaRecyclerView;
@@ -44,31 +44,31 @@ public class SearchAdActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_ad);
+        setContentView(R.layout.activity_my_ads);
 
         //action bar
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Advertisement List");
+        actionBar.setTitle("My Ads");
 
 
         mSharedPref=getSharedPreferences("SortSettings",MODE_PRIVATE);
         String mSorting=mSharedPref.getString("Sort","newest");// default newst adds will showing first
 
-            if(mSorting.equals("newest")){
-                mLayoutManager=new LinearLayoutManager(this);
-                //load newest items first
-                mLayoutManager.setReverseLayout(true);
-                mLayoutManager.setStackFromEnd(true);
+        if(mSorting.equals("newest")){
+            mLayoutManager=new LinearLayoutManager(this);
+            //load newest items first
+            mLayoutManager.setReverseLayout(true);
+            mLayoutManager.setStackFromEnd(true);
 
-            }
+        }
 
-            else if(mSorting.equals("oldest")){
+        else if(mSorting.equals("oldest")){
 
-                mLayoutManager=new LinearLayoutManager(this);
-                //load oldest items first
-                mLayoutManager.setReverseLayout(false);
-                mLayoutManager.setStackFromEnd(false);
-            }
+            mLayoutManager=new LinearLayoutManager(this);
+            //load oldest items first
+            mLayoutManager.setReverseLayout(false);
+            mLayoutManager.setStackFromEnd(false);
+        }
 
 
 
@@ -76,14 +76,20 @@ public class SearchAdActivity extends AppCompatActivity {
         mRecylaRecyclerView.setHasFixedSize(true);
 
         mRecylaRecyclerView.setLayoutManager(mLayoutManager);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String userId=user.getUid();
 
-        mRef  = FirebaseDatabase.getInstance().getReference("post_ad_details");
+
+        mRef  =FirebaseDatabase.getInstance().getReference("post_ad_details");
         //mRef = mFirebaseDatabase.
 
 
     }
 
+
     private void firebaseSearch(String searchText){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String userId=user.getUid();
         String query=searchText.toLowerCase();
         Query firebaseSearchQuery =mRef.orderByChild("search").startAt(query).endAt(query+"\uf8ff");
 
@@ -117,7 +123,7 @@ public class SearchAdActivity extends AppCompatActivity {
                     public GetAdDetailsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
                         View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row,viewGroup,false);
                         GetAdDetailsViewHolder viewHolder=new GetAdDetailsViewHolder(view);
-                        viewHolder.SetOnclickListner(new ClickListner() {
+                        viewHolder.SetOnclickListner(new GetAdDetailsViewHolder.ClickListner() {
                             @Override
                             public void onItemClick(View view, int position) {
                                 TextView mItemTypeTv=view.findViewById(R.id.rTypeOfitem);
@@ -133,7 +139,6 @@ public class SearchAdActivity extends AppCompatActivity {
                                 TextView mBuyerTv=findViewById(R.id.rbuyerId);
                                 TextView mAdStatusTv=findViewById(R.id.rAdStatus);
 
-
                                 String mItemType=mItemTypeTv.getText().toString();
                                 String mItemName=mItemNametv.getText().toString();
                                 String mUserName=mUserNameTv.getText().toString();
@@ -147,7 +152,6 @@ public class SearchAdActivity extends AppCompatActivity {
                                 String mLongitude=mLongitudeTV.getText().toString();
                                 String mBuyerId=mBuyerTv.getText().toString();
                                 String mAdStatus=mAdStatusTv.getText().toString();
-
 
                                 //phrase data to new activity
 
@@ -190,12 +194,17 @@ public class SearchAdActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String userId=user.getUid();
+
         super.onStart();
+        Query query=FirebaseDatabase.getInstance().getReference("post_ad_details")
+                .orderByChild("userId").equalTo(userId);
 
         FirebaseRecyclerOptions<Model> options=
                 new FirebaseRecyclerOptions.Builder<Model>()
-                .setQuery(mRef,Model.class)
-                .build();
+                        .setQuery(query,Model.class)
+                        .build();
         FirebaseRecyclerAdapter<Model,GetAdDetailsViewHolder> adpter=
                 new FirebaseRecyclerAdapter<Model, GetAdDetailsViewHolder>(options) {
                     @Override
@@ -222,7 +231,7 @@ public class SearchAdActivity extends AppCompatActivity {
                     public GetAdDetailsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
                         View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row,viewGroup,false);
                         GetAdDetailsViewHolder viewHolder=new GetAdDetailsViewHolder(view);
-                        viewHolder.SetOnclickListner(new ClickListner() {
+                        viewHolder.SetOnclickListner(new GetAdDetailsViewHolder.ClickListner() {
                             @Override
                             public void onItemClick(View view, int position) {
                                 TextView mItemTypeTv=view.findViewById(R.id.rTypeOfitem);
@@ -254,7 +263,7 @@ public class SearchAdActivity extends AppCompatActivity {
 
                                 //phrase data to new activity
 
-                                Intent intent =new Intent(view.getContext(),SearchAdDetailsActivity.class);
+                                Intent intent =new Intent(view.getContext(),MyAdsDetailsActivity.class);
                                 ByteArrayOutputStream stream=new ByteArrayOutputStream();
                                 mBitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
                                 byte[] bytes=stream.toByteArray();
@@ -289,8 +298,8 @@ public class SearchAdActivity extends AppCompatActivity {
 
     public static  class  GetAdDetailsViewHolder extends  RecyclerView.ViewHolder {
 
-       TextView mItemTypeView, mItemNameView,mUserNameView, mpriceView, mPhoneNo,mUserId,mAdId,mLatitude,mlongitude,mBuyerId,mAdStatus;
-       ImageView mImageView;
+        TextView mItemTypeView, mItemNameView,mUserNameView, mpriceView, mPhoneNo,mUserId,mAdId,mLatitude,mlongitude,mBuyerId,mAdStatus;
+        ImageView mImageView;
         public GetAdDetailsViewHolder(@NonNull View itemView) {
             super(itemView);
             mItemTypeView=itemView.findViewById(R.id.rTypeOfitem);
@@ -318,7 +327,7 @@ public class SearchAdActivity extends AppCompatActivity {
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                   mClickListner.onItemLongclick(view,getAdapterPosition());
+                    mClickListner.onItemLongclick(view,getAdapterPosition());
                     return true;
                 }
             });
@@ -329,15 +338,15 @@ public class SearchAdActivity extends AppCompatActivity {
 
 
         }
-    private  ClickListner mClickListner;
+        private  ClickListner mClickListner;
 
 
         //interface to sendCallbacks
 
         public  interface ClickListner{
 
-        void onItemClick(View view,int position);
-        void onItemLongclick(View view,int position);
+            void onItemClick(View view,int position);
+            void onItemLongclick(View view,int position);
 
 
         }
@@ -346,7 +355,6 @@ public class SearchAdActivity extends AppCompatActivity {
             mClickListner=clickListner;
 
         }
-
     }
 
 
@@ -420,7 +428,7 @@ public class SearchAdActivity extends AppCompatActivity {
                         }
                     }
                 });
-            builder.show();
+        builder.show();
 
 
 

@@ -53,7 +53,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 int id=item.getItemId();
                 if(id==R.id.myAds){
                     Toast.makeText(HomeActivity.this,"My Ads",Toast.LENGTH_SHORT).show();
-                    stratMyProfile();
+                    StratMyAds();
                 }
                 else if(id==R.id.settings){
                     Toast.makeText(HomeActivity.this,"Settings",Toast.LENGTH_SHORT).show();
@@ -95,6 +95,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void stratMyProfile() {
         Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
+    private void StratMyAds(){
+
+        Intent intent = new Intent(this, MyAdsActivity.class);
         startActivity(intent);
     }
 

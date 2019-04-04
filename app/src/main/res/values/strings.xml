@@ -26,8 +26,12 @@
     <string name="title_activity_driver_map">Map</string>
     <string name="dump_waste">Dump Waste</string>
     <string name="start_journey">Start Journey</string>
+    <string name="start_buyier_journey">Start Journey</string>
+    <string name="cancel_booking">Cancel Booking</string>
     <string name="pick_up_waste">Pick Up waste</string>
     <string name="Open">open</string>
     <string name="Close">close</string>
+    <string name="title_activity_buyier_map">Map</string>
+    <string name="title_activity_my_ads_map">Map</string>
 
 </resources>

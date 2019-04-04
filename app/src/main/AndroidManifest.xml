@@ -20,10 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SearchAdActivity"></activity>
-        <activity android:name=".CustomerLoginActivity" />
-        <activity android:name=".DriverLoginActivity" />
-        <activity android:name=".ResidentMapActivity" />
+        <activity android:name=".MyAdsDetailsActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -34,8 +31,20 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBjdmsEtYZ0s2l1FN-sKFeeXK2FL_8KOdk" />
+            android:value="@string/google_maps_key" />
 
+        <activity
+            android:name=".MyAdsMapActivity"
+            android:label="@string/title_activity_my_ads_map" />
+        <activity android:name=".MyAdsActivity" />
+        <activity
+            android:name=".BuyierMapActivity"
+            android:label="@string/title_activity_buyier_map" />
+        <activity android:name=".SearchAdDetailsActivity" />
+        <activity android:name=".SearchAdActivity" />
+        <activity android:name=".CustomerLoginActivity" />
+        <activity android:name=".DriverLoginActivity" />
+        <activity android:name=".ResidentMapActivity" />
         <activity
             android:name=".DriverMapActivity"
             android:label="@string/title_activity_driver_map" />

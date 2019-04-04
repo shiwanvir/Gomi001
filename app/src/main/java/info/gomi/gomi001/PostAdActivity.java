@@ -171,8 +171,10 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
       String imagepath=pathToFile;
       String longitude=loc_longitude.getText().toString().trim();
       String latitude=loc_latitude.getText().toString().trim();
-      String addStatus="1";
-      PostAdDetails adDetails=new PostAdDetails(userId,addId,userName,phoneNO,item,itemtype,itemprice,imagepath,latitude,longitude,addStatus);
+      String addStatus="available";
+      String buyerId="null";
+      String search=itemtype.toLowerCase();
+      PostAdDetails adDetails=new PostAdDetails(userId,addId,userName,phoneNO,item,itemtype,itemprice,imagepath,latitude,longitude,addStatus,search,buyerId);
 
         saveDeatils.child(addId).setValue(adDetails);
         if(imageUri!=null){
