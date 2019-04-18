@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.onesignal.OneSignal;
 
 public class CustomerLoginActivity extends AppCompatActivity {
 
@@ -26,12 +28,14 @@ public class CustomerLoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
     private ProgressDialog progressDialog;
+    private DatabaseReference deviceTokenRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_login);
         mAuth=FirebaseAuth.getInstance();
+        deviceTokenRef=FirebaseDatabase.getInstance().getReference().child("Users").child("Customers");
         firebaseAuthStateListener= new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -80,6 +84,31 @@ public class CustomerLoginActivity extends AppCompatActivity {
                             String userId = mAuth.getCurrentUser().getUid();
                             DatabaseReference DbRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(userId);
                             DbRef.setValue(true);
+                            //String currentUserId=mAuth.getCurrentUser().getUid();
+                            String deviceToken= FirebaseInstanceId.getInstance().getToken();
+                            deviceTokenRef.child(userId).child("device_token")
+                                    .setValue(deviceToken).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        //
+                                    }
+                                }
+                            });
+
+
+                                OneSignal.startInit(CustomerLoginActivity.this).init();
+                                //subscribe user for the service
+                                OneSignal.setSubscription(true);
+                                //set notification key for identify each user uniquely
+                                OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
+                                    @Override
+                                    public void idsAvailable(String userId, String registrationId) {
+                                        FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(FirebaseAuth.getInstance().getUid()).child("notificationKey").setValue(userId);
+                                    }
+                                });
+                                OneSignal.setInFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification);
+
 
 
                         }
@@ -100,7 +129,33 @@ public class CustomerLoginActivity extends AppCompatActivity {
 
                         if(!task.isSuccessful()){
 
+
                             Toast.makeText(CustomerLoginActivity.this,"Login Error",Toast.LENGTH_SHORT).show();
+                        }
+                        else if(task.isSuccessful()){
+                            String currentUserId=mAuth.getCurrentUser().getUid();
+                            String deviceToken= FirebaseInstanceId.getInstance().getToken();
+                            deviceTokenRef.child(currentUserId).child("device_token")
+                                    .setValue(deviceToken).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        //
+                                    }
+                                }
+                            });
+                            OneSignal.startInit(CustomerLoginActivity.this).init();
+                            //subscribe user for the service
+                            OneSignal.setSubscription(true);
+                            //set notification key for identify each user uniquely
+                            OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
+                                @Override
+                                public void idsAvailable(String userId, String registrationId) {
+                                    FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(FirebaseAuth.getInstance().getUid()).child("notificationKey").setValue(userId);
+                                }
+                            });
+                            OneSignal.setInFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification);
+
                         }
 
                     }

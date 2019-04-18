@@ -11,12 +11,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import es.dmoral.toasty.Toasty;
 
 public class MyAdsDetailsActivity extends AppCompatActivity {
     TextView mItemTypeTv,mItemNameTv,mUserNameTv,mPriceTv,mPhoneNoTv,mAdStatusTv;
     ImageView mImageViewIv;
-    String userId,adId,latitide,longtide,adStatus,buyerId;
-    Button seeSellerLocation;
+    String userId,adId,latitide,longtide,adStatus,buyerId,productName;
+    Button seeSellerLocation,deleteAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,7 @@ public class MyAdsDetailsActivity extends AppCompatActivity {
         mImageViewIv=findViewById(R.id.sadImageview);
         seeSellerLocation=findViewById(R.id.see_location);
         mAdStatusTv=findViewById(R.id.sadAdStatus);
+        deleteAd=findViewById(R.id.deleteAd);
 
 
         //get  data from Intent
@@ -47,13 +54,14 @@ public class MyAdsDetailsActivity extends AppCompatActivity {
         String userName=getIntent().getStringExtra("userName");
         String price=getIntent().getStringExtra("price");
         String phoneNo=getIntent().getStringExtra("phoneNo");
-        String adStatus=getIntent().getStringExtra("adStatus");
+        final String adStatus=getIntent().getStringExtra("adStatus");
         userId=getIntent().getStringExtra("userId");
         adId=getIntent().getStringExtra("adId");
         latitide=getIntent().getStringExtra("latitude");
         longtide=getIntent().getStringExtra("longitude");
         buyerId=getIntent().getStringExtra("buyerId");
         //adStatus=getIntent().getStringExtra("adStatus");
+        productName=getIntent().getStringExtra("itemName");
 
         Bitmap bmp= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
 
@@ -76,15 +84,41 @@ public class MyAdsDetailsActivity extends AppCompatActivity {
         seeSellerLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(view.getContext(),MyAdsMapActivity.class);
-                //ByteArrayOutputStream stream=new ByteArrayOutputStream();
-                intent.putExtra("userId",userId);
-                intent.putExtra("adId",adId);
-                intent.putExtra("latitude",latitide);
-                intent.putExtra("longitude",longtide);
-                intent.putExtra("buyerId",buyerId);
-                //intent.putExtra("adStatus",adStatus);
-                startActivity(intent);
+                if(adStatus.equals("available")){
+                    Toasty.error(MyAdsDetailsActivity.this, "This add Have'nt a Buyer yet.. ", Toast.LENGTH_SHORT).show();
+                    //Toasty.error()
+                }
+                else {
+                    Intent intent = new Intent(view.getContext(), MyAdsMapActivity.class);
+                    //ByteArrayOutputStream stream=new ByteArrayOutputStream();
+                    intent.putExtra("userId", userId);
+                    intent.putExtra("adId", adId);
+                    intent.putExtra("latitude", latitide);
+                    intent.putExtra("longitude", longtide);
+                    intent.putExtra("buyerId", buyerId);
+                    //intent.putExtra("adStatus",adStatus);
+                    intent.putExtra("itemName",productName);
+                    finish();
+                    startActivity(intent);
+                }
+            }
+        });
+
+        deleteAd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!buyerId.equals("null") ) {
+                    Toasty.warning(MyAdsDetailsActivity.this, "You should cancel the booking first ", Toast.LENGTH_SHORT).show();
+                    //return;
+                }
+                else{
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference ref = database.getReference();
+                DatabaseReference deleteAd = ref.child("post_ad_details").child(adId);
+                deleteAd.removeValue();
+                finish();
+                Intent intent = new Intent(v.getContext(), MyAdsActivity.class);
+            }
             }
         });
 

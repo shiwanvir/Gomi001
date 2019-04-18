@@ -11,14 +11,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.ByteArrayOutputStream;
+
+import es.dmoral.toasty.Toasty;
 
 public class SearchAdDetailsActivity extends AppCompatActivity {
 
     TextView mItemTypeTv,mItemNameTv,mUserNameTv,mPriceTv,mPhoneNoTv,mAdStatusTv;
     ImageView mImageViewIv;
-    String userId,adId,latitide,longtide,adStatus;
+    String userId,adId,latitide,longtide,adStatus,buyerId,prodoctName;
     Button seeSellerLocation;
 
     @Override
@@ -31,6 +36,9 @@ public class SearchAdDetailsActivity extends AppCompatActivity {
         actionbar.setTitle("Advertisement Details");
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setDisplayShowCustomEnabled(true);
+        //get loged user id fro checking buyer id with the id of the ad's buyerid
+        final String logedBuyerid= FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         //Initialize views
         mItemTypeTv=  findViewById(R.id.sadTypeOfitem);
         mItemNameTv=findViewById(R.id.sadItemName);
@@ -49,13 +57,13 @@ public class SearchAdDetailsActivity extends AppCompatActivity {
         String userName=getIntent().getStringExtra("userName");
         String price=getIntent().getStringExtra("price");
         String phoneNo=getIntent().getStringExtra("phoneNo");
-        String adStatus=getIntent().getStringExtra("adStatus");
+        final String adStatus=getIntent().getStringExtra("adStatus");
         userId=getIntent().getStringExtra("userId");
         adId=getIntent().getStringExtra("adId");
         latitide=getIntent().getStringExtra("latitude");
         longtide=getIntent().getStringExtra("longitude");
-        //adStatus=getIntent().getStringExtra("adStatus");
-
+        buyerId=getIntent().getStringExtra("buyerId");
+        prodoctName=getIntent().getStringExtra("itemName");
         Bitmap bmp= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
 
 
@@ -77,14 +85,27 @@ public class SearchAdDetailsActivity extends AppCompatActivity {
         seeSellerLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(view.getContext(),BuyierMapActivity.class);
-                //ByteArrayOutputStream stream=new ByteArrayOutputStream();
-                intent.putExtra("userId",userId);
-                intent.putExtra("adId",adId);
-                intent.putExtra("latitude",latitide);
-                intent.putExtra("longitude",longtide);
-                //intent.putExtra("adStatus",adStatus);
-                startActivity(intent);
+
+               // Log.i(" Ad status", "AD Status" + adStatus);
+                //Log.i(" loged user id", "loged user id" + logedBuyerid);
+                //Log.i(" Buyer id ", " Buyer id" + buyerId);
+                if (adStatus.equals("Booked")&& !buyerId.equals(logedBuyerid)){
+                    Toasty.warning(SearchAdDetailsActivity.this, "This ad is already booked", Toast.LENGTH_SHORT).show();
+                }
+                else{
+
+                    Intent intent = new Intent(view.getContext(), BuyierMapActivity.class);
+                    //ByteArrayOutputStream stream=new ByteArrayOutputStream();
+                    intent.putExtra("userId", userId);
+                    intent.putExtra("adId", adId);
+                    intent.putExtra("latitude", latitide);
+                    intent.putExtra("longitude", longtide);
+                    intent.putExtra("itemName",prodoctName);
+                    //intent.putExtra("adStatus",adStatus);
+                    finish();
+
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -98,4 +119,15 @@ public class SearchAdDetailsActivity extends AppCompatActivity {
 
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        //Toast.makeText(this, "back key pressed", Toast.LENGTH_SHORT).show();
+        Intent intent= new Intent(this,SearchAdActivity.class);
+        finish();
+        startActivity(intent);
+        super.onBackPressed();
+    }
+
 }

@@ -1,6 +1,7 @@
 package info.gomi.gomi001;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -35,6 +37,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -51,13 +54,15 @@ import java.util.Map;
 public class BuyierMapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, RoutingListener {
 
     private GoogleMap mMap;
-    String userId, adId, latitide, longtide,adStatus;
+    String userId, adId, latitide, longtide,adStatus,notificationKey,productName;
     Double sellerLatitude, sellerLongtide;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     private LatLng sellerLocation;
     LocationRequest mLocationRequest;
     Button buyerStartJourny;
+    Button cancelBooking;
+    DatabaseReference notificationRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +73,19 @@ public class BuyierMapActivity extends FragmentActivity implements OnMapReadyCal
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //create notification ref
+        notificationRef=FirebaseDatabase.getInstance().getReference().child("Notifications");
         userId = getIntent().getStringExtra("userId");
         adId = getIntent().getStringExtra("adId");
         latitide = getIntent().getStringExtra("latitude");
         longtide = getIntent().getStringExtra("longitude");
+        productName=getIntent().getStringExtra("itemName");
         //adStatus=getIntent().getStringExtra("adStatus");
         sellerLatitude = Double.parseDouble(latitide);
         sellerLongtide = Double.parseDouble(longtide);
         buyerStartJourny=findViewById(R.id.start_buyer_journey);
+        cancelBooking=findViewById(R.id.cancel_booking);
        sellerLocation=new LatLng(sellerLatitude,sellerLongtide);
         
         buyerStartJourny.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +106,71 @@ public class BuyierMapActivity extends FragmentActivity implements OnMapReadyCal
                 //final String bookedaddId=refForSeller.push().getKey();
                 //BookedAdDetails bookedAdDetails=new BookedAdDetails(userId,adId,buyierId);
                 //refForSeller.child(bookedaddId).setValue(bookedAdDetails);
+
+               /* HashMap<String,String>bookNotification=new HashMap<>();
+                bookNotification.put("from",buyierId);
+                bookNotification.put("type","booking");
+                notificationRef.child(userId).push()
+                        .setValue(bookNotification)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                               if(task.isSuccessful()){
+
+                                   //write some thing
+                               }
+                            }
+                        });*/
+               //get notification key of seller
+                DatabaseReference  notiref= FirebaseDatabase.getInstance().getReference();
+                DatabaseReference senNotificationToseller=notiref.child("Users").child("Customers").child(userId).child("notificationKey");
+                senNotificationToseller.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        notificationKey=dataSnapshot.getValue(String.class);
+                        //Log.i(" notification Key", "notification Key" + notificationKey);
+                        new SendAdNotification("your ad have bookeed by a user",productName,notificationKey);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                //Log.i(" user id", "user id" + userId);
+
+
+
+            }
+        });
+
+        cancelBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final FirebaseDatabase database=FirebaseDatabase.getInstance();
+                DatabaseReference  ref= database.getReference();
+                DatabaseReference refForSeller=ref.child("post_ad_details").child(adId );
+                refForSeller.child("buyerId").setValue("null");
+                refForSeller.child("adStatus").setValue("available");
+                //get notification key of seller
+                DatabaseReference  notiref= FirebaseDatabase.getInstance().getReference();
+                DatabaseReference senNotificationToseller=notiref.child("Users").child("Customers").child(userId).child("notificationKey");
+                senNotificationToseller.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        notificationKey=dataSnapshot.getValue(String.class);
+                        //Log.i(" notification Key", "notification Key" + notificationKey);
+                        new SendAdNotification("your ad booking canceled by the user",productName,notificationKey);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                Intent intent=new Intent(v.getContext(),SearchAdActivity.class);
+                finish();
+                startActivity(intent);
             }
         });
 
@@ -298,4 +373,25 @@ public class BuyierMapActivity extends FragmentActivity implements OnMapReadyCal
     public void onRoutingCancelled() {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        //Toast.makeText(this, "back key pressed", Toast.LENGTH_SHORT).show();
+        Intent intent= new Intent(this,SearchAdActivity.class);
+        finish();
+        startActivity(intent);
+        super.onBackPressed();
+    }
+
+
+/*  @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            //Intent intent= new Intent(this,SearchAdActivity.class);
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }*/
 }

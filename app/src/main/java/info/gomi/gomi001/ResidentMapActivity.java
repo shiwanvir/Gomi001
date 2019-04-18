@@ -1,9 +1,11 @@
 package info.gomi.gomi001;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -12,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -39,6 +42,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 public class ResidentMapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
     private GoogleMap mMap;
@@ -47,7 +52,9 @@ public class ResidentMapActivity extends FragmentActivity implements OnMapReadyC
     LocationRequest mLocationRequest;
     private Button mdumpWaste;
     private LatLng pickUpLocation;
-
+    public Marker mWasteMaker;
+    //schedule task
+    private Handler mHandler=new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -59,24 +66,66 @@ public class ResidentMapActivity extends FragmentActivity implements OnMapReadyC
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         mdumpWaste=(Button)findViewById(R.id.dump_waste);
+        // Initialize a new instance of Handler
+
 
         mdumpWaste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String userId=FirebaseAuth.getInstance().getCurrentUser().getUid();
                 DatabaseReference ref=FirebaseDatabase.getInstance().getReference("dumpWaste");
+                DatabaseReference refMywaste=FirebaseDatabase.getInstance().getReference("dumpWaste").child(userId);
+
                 GeoFire geoFire=new GeoFire(ref);
                 geoFire.setLocation(userId,new GeoLocation(mLastLocation.getLatitude(),mLastLocation.getLongitude()));
                 pickUpLocation=new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(pickUpLocation).title("Dump here").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_waste_bag)));
+                 mWasteMaker=mMap.addMarker(new MarkerOptions().position(pickUpLocation).title("Dump here").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_waste_bag)));
                 mdumpWaste.setText("Waste Dumped..!");
                 mdumpWaste.setClickable(false);
+                Toasty.success(ResidentMapActivity.this, "your waste have dumped..! ", Toast.LENGTH_SHORT).show();
                 getColosetDriver();
+                refMywaste.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(!dataSnapshot.exists()){
+                            Log.i(" just now i'm null", "just now i'm null" );
+                            Intent intent = getIntent();
+                            finish();
+                            startActivity(intent);
 
+                            //getDumpedwasteAround();
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                //check sheduled task
+                //mHandler.postDelayed(mDumpedWasteAroundRunnable,5000);
+                //mDumpedWasteAroundRunnable.run();
 
             }
         });
+
+
+
     }
+
+    //for shedule tasks
+    private Runnable mDumpedWasteAroundRunnable=new Runnable() {
+        @Override
+        public void run() {
+            //Toasty.success(ResidentMapActivity.this, "im repeaatingggggggg! ", Toast.LENGTH_SHORT).show();
+
+            getDumpedwasteAround();
+            mHandler.postDelayed(this,5000);
+        }
+    };
 
 
     private int radius=100;
@@ -238,6 +287,8 @@ private Marker mDriverMaker;
     }
 
 
+
+
     List<Marker> markerList =new ArrayList<Marker>();
     private void getDumpedwasteAround(){
 
@@ -270,10 +321,12 @@ private Marker mDriverMaker;
                 for(Marker markerIncrment:markerList){
                     if(markerIncrment.getTag().equals(key)){
                         markerList.remove(markerIncrment);
+                        //markerIncrment.remove();
                         return;
 
                     }
                 }
+
 
             }
 

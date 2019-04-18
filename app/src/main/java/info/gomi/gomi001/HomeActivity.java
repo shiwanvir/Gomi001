@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.onesignal.OneSignal;
 
 import java.time.Instant;
 
@@ -88,6 +89,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void logOut() {
         Toast.makeText(HomeActivity.this,"Login out.....",Toast.LENGTH_SHORT).show();
+        //signing out from oneSignal subscription
+        OneSignal.setSubscription(false);
         firebaseAuth.signOut();
         finish();
         startActivity(new Intent(this,MainActivity.class));

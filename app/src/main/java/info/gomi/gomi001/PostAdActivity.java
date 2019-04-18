@@ -51,6 +51,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import es.dmoral.toasty.Toasty;
 import info.gomi.gomi001.SellerMapActivity;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
@@ -77,6 +78,7 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
     Location mLastLocation;
     StorageReference storageReference;
     private FusedLocationProviderClient fusedLocationClient;
+    private static final int PICK_IMAGE=100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,14 +151,20 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
         from_gllary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent,1);
+               // Intent intent=new Intent(Intent.ACTION_PICK);
+                //intent.setType("image/*");
+                //startActivityForResult(intent,1);
+                openGallary();
             }
         });
         image=findViewById(R.id.iamge);
 
 
+    }
+
+    private void openGallary() {
+        Intent gallery=new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery,PICK_IMAGE);
     }
 
     private void addDetails() {
@@ -240,7 +248,7 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         //finish();
-        Toast.makeText(this,"Ad posted Sucessfully....",Toast.LENGTH_LONG).show();
+        Toasty.success(this, "Ad posted Sucessfully....", Toast.LENGTH_LONG).show();
     }
 
 
@@ -253,6 +261,11 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
                 Bitmap bitmap = BitmapFactory.decodeFile(pathToFile);
                 image.setImageBitmap(bitmap);
 
+
+            }
+            else if (requestCode==PICK_IMAGE){
+            imageUri=data.getData();
+            image.setImageURI(imageUri);
 
             }
         }

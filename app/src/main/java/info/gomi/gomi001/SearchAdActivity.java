@@ -167,6 +167,7 @@ public class SearchAdActivity extends AppCompatActivity {
                                 intent.putExtra("longitude",mLongitude);
                                 intent.putExtra("buyerId",mBuyerId);
                                 intent.putExtra("adStatus",mAdStatus);
+                                finish();
                                 startActivity(intent);
                             }
 
@@ -270,6 +271,7 @@ public class SearchAdActivity extends AppCompatActivity {
                                 intent.putExtra("longitude",mLongitude);
                                 intent.putExtra("buyerId",mBuyerId);
                                 intent.putExtra("adStatus",mAdStatus);
+                                finish();
                                 startActivity(intent);
                             }
 

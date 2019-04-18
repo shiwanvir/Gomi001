@@ -51,7 +51,7 @@ import java.util.Map;
 public class MyAdsMapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, RoutingListener {
 
     private GoogleMap mMap;
-    String userId, adId, latitide, longtide,adStatus,buyerId;
+    String userId, adId, latitide, longtide,adStatus,buyerId,notificationKey,productName;
     Double sellerLatitude, sellerLongtide;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
@@ -60,6 +60,7 @@ public class MyAdsMapActivity extends FragmentActivity implements OnMapReadyCall
     LocationRequest mLocationRequest;
     Button cancelBooking;
     private List<Polyline> polylines;
+    DatabaseReference notificationRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,7 @@ public class MyAdsMapActivity extends FragmentActivity implements OnMapReadyCall
         latitide = getIntent().getStringExtra("latitude");
         longtide = getIntent().getStringExtra("longitude");
         buyerId=getIntent().getStringExtra("buyerId");
+        productName=getIntent().getStringExtra("itemName");
 
         //get user ad posted location not the current location for the tracking
         sellerLatitude = Double.parseDouble(latitide);
@@ -92,9 +94,32 @@ public class MyAdsMapActivity extends FragmentActivity implements OnMapReadyCall
                 cancelAdbooking.child("buyerId").setValue("null");
                 cancelAdbooking.child("adStatus").setValue("available");
                 mBuyerMaker.remove();
+                //remove buyer id from buyers available
+               // Task<Void> buyerLocationRef=FirebaseDatabase.getInstance().getReference().child("buyersAvailable").child(buyerId).removeValue();
+
+                //Log.i(" buyer Id", "buyer Id" + buyerId);
+                //get notification key of seller
+                DatabaseReference  notiref= FirebaseDatabase.getInstance().getReference();
+                DatabaseReference senNotificationToseller=notiref.child("Users").child("Customers").child(buyerId).child("notificationKey");
+                senNotificationToseller.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        notificationKey=dataSnapshot.getValue(String.class);
+                        //Log.i(" notification Key", "notification Key" + notificationKey);
+                        new SendAdNotification("your ad booking canceled by the Owner",productName,notificationKey);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
                 //Intent intent = getIntent();
-                //finish();
+                finish();
                 //startActivity(intent);
+
+                Intent intent=new Intent(v.getContext(),MyAdsActivity.class);
+                startActivity(intent);
             }
         });
         //getRouterToMaker(initBuyerLocation);
@@ -305,6 +330,8 @@ public class MyAdsMapActivity extends FragmentActivity implements OnMapReadyCall
     public void onBackPressed() {
         // do something
         super.onBackPressed();
-       
+
+
+
     }
 }

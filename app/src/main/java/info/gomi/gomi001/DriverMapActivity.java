@@ -50,6 +50,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 public class DriverMapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener, RoutingListener {
 
     private GoogleMap mMap;
@@ -62,6 +64,7 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
     private Button startJourny;
     Location nLocation;
     private FirebaseAuth mAuth;
+    String notificationKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +114,23 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
         GeoFire geoFirePickedwaste=new GeoFire(pickedWaste);
 
         geoFirePicwaste.removeLocation(nearestUserId);
+        //get notification key of seller
+        DatabaseReference  notiref= FirebaseDatabase.getInstance().getReference();
+        DatabaseReference senNotificationToseller=notiref.child("Users").child("Customers").child(nearestUserId).child("notificationKey");
+        senNotificationToseller.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                notificationKey=dataSnapshot.getValue(String.class);
+                //Log.i(" notification Key", "notification Key" + notificationKey);
+                //send notification for user
+                new SendAdNotification("your waste picked by driver","Dump waste",notificationKey);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         geoFirePickedwaste.setLocation(nearestUserId,new GeoLocation(mLastLocation.getLatitude(),mLastLocation.getLongitude()));
 
 
@@ -355,7 +375,7 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
             Polyline polyline = mMap.addPolyline(polyOptions);
             polylines.add(polyline);
 
-            Toast.makeText(getApplicationContext(),"Route "+ (i+1) +": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
+            Toasty.info(getApplicationContext(), "Route " + (i + 1) + ": distance - " + route.get(i).getDistanceValue() + ": duration - " + route.get(i).getDurationValue(), Toast.LENGTH_SHORT).show();
         }
 
     }
