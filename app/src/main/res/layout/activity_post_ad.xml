@@ -21,96 +21,109 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="fill_parent"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="3dp"
-                android:text="@string/contact_form_name"
-                android:textAllCaps="true"
-                android:textColor="@color/formColor"
-                android:textSize="20sp" />
-
-            <EditText
-
+                android:theme="@style/EditTextHint"
                 android:id="@+id/your_name"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:inputType="text"
-                android:singleLine="true"
-                android:textSize="20sp" />
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="your name"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:inputType="text"
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="3dp"
-                android:text="@string/phone_no"
-                android:textAllCaps="true"
-                android:textColor="@color/formColor"
-                android:textSize="20sp" />
+                    />
 
-            <EditText
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditTextHint"
                 android:id="@+id/phone_no"
-                android:layout_width="fill_parent"
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="10">
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="phone Number"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:inputType="phone"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:inputType="textEmailAddress"
-                android:singleLine="true"
-                android:textSize="20sp" />
-
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="3dp"
-                android:text="@string/item_name"
-                android:textAllCaps="true"
-                android:textColor="@color/formColor"
-                android:textSize="20sp" />
-
-            <EditText
+                android:theme="@style/EditTextHint"
                 android:id="@+id/item_name"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:inputType="text"
-                android:singleLine="true"
-                android:textSize="20sp" />
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="15">
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Item Name"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:inputType="text"/>
+            </android.support.design.widget.TextInputLayout>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="32dp"
                 android:paddingLeft="3dp"
+                android:paddingTop="5dp"
                 android:text="@string/item_type"
-                android:textAllCaps="true"
-                android:textColor="@color/formColor"
+                android:textColor="@color/colorWhite"
                 android:textSize="20sp" />
 
 
-            <Spinner
-                android:id="@+id/item_type"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="38dp" />
-
-            <TextView
-                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:paddingLeft="3dp"
-                android:text="@string/price"
-                android:textAllCaps="true"
-                android:textColor="@color/formColor"
-                android:textSize="20sp" />
+                android:theme="@style/EditTextHint"
+                android:id="@+id/item_Type_validation"
+                app:errorEnabled="true">
 
-            <EditText
+                <Spinner
+                    android:id="@+id/item_type"
+                    android:background="@drawable/gradient"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditTextHint"
                 android:id="@+id/price"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:inputType="text"
-                android:singleLine="true"
-                android:textSize="20sp" />
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="15">
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Item Price Rs."
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:inputType="numberDecimal"/>
+            </android.support.design.widget.TextInputLayout>
 
             <TextView
                 android:layout_width="fill_parent"
@@ -118,15 +131,21 @@
                 android:paddingLeft="3dp"
                 android:text="@string/image"
                 android:textAllCaps="true"
-                android:textColor="@color/formColor"
+                android:textColor="#fff"
                 android:textSize="20sp" />
-
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditTextHint"
+                android:id="@+id/image_validation"
+                app:errorEnabled="true">
 
             <ImageView
                 android:id="@+id/iamge"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:src="@drawable/twitter" />
+            </android.support.design.widget.TextInputLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -185,14 +204,29 @@
                     android:textColor="@android:color/white"
                     android:textSize="13sp" />
             </RelativeLayout>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dp"
+                android:text="Your location Latitude"
+                android:textColor="#fff"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/loc_latitude"
                 android:layout_width="fill_parent"
                 android:layout_height="46dp"
                 android:layout_marginBottom="20dp"
-                android:inputType="text"
+                android:editable="false"
+                android:textColor="#fff"
                 android:singleLine="true"
+                android:textSize="20sp" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dp"
+                android:text="Your location Longitude"
+                android:textColor="#fff"
                 android:textSize="20sp" />
 
             <EditText
@@ -200,8 +234,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="46dp"
                 android:layout_marginBottom="20dp"
-                android:inputType="text"
+                android:editable="false"
                 android:singleLine="true"
+                android:textColor="#fff"
                 android:textSize="20sp" />
 
         <LinearLayout
@@ -239,6 +274,8 @@
 
 
         </LinearLayout>
+
+
         </LinearLayout>
     </ScrollView>
 

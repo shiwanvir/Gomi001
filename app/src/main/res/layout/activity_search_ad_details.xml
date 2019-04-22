@@ -17,64 +17,186 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-              <TextView
-                android:id="@+id/sadTypeOfitem"
-                android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="141dp"
                 android:layout_height="wrap_content"
-                android:text="Type"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp"
+                android:text="Item Type:"
                 android:textColor="#000"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
+              <TextView
+                android:id="@+id/sadTypeOfitem"
+                  android:layout_width="187dp"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentTop="true"
+                  android:layout_alignParentEnd="true"
+                  android:layout_alignParentRight="true"
+                  android:layout_marginStart="45dp"
+                  android:layout_marginLeft="45dp"
+                  android:layout_marginTop="0dp"
+                  android:layout_marginEnd="29dp"
+                  android:layout_marginRight="29dp"
+                  android:text="Type"
+                  android:textColor="#1969ea"
+                  android:textSize="22sp"
+                  android:textStyle="bold" />
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="10dp">
+            <TextView
+                android:layout_width="141dp"
+                android:layout_height="wrap_content"
+                android:text="Item Name:"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
         <TextView
             android:id="@+id/sadItemName"
-            android:layout_width="match_parent"
+            android:layout_width="187dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="45dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="29dp"
+            android:layout_marginRight="29dp"
             android:text="Item Name"
-            android:textColor="#000"
-            android:textSize="15sp"
+            android:textColor="#1969ea"
+            android:textSize="18sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/sadUserName"
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="User Name"
-            android:textColor="#000"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:paddingRight="10dp">
+            <TextView
+                android:layout_width="141dp"
+                android:layout_height="wrap_content"
+                android:text="Price:   Rs."
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <TextView
+          <TextView
             android:id="@+id/sadPrice"
+              android:layout_width="187dp"
+              android:layout_height="wrap_content"
+              android:layout_alignParentTop="true"
+              android:layout_alignParentEnd="true"
+              android:layout_alignParentRight="true"
+              android:layout_marginStart="45dp"
+              android:layout_marginLeft="45dp"
+              android:layout_marginTop="0dp"
+              android:layout_marginEnd="29dp"
+              android:layout_marginRight="29dp"
+              android:text="rPrice"
+              android:textColor="#1969ea"
+              android:textSize="18sp"
+              android:textStyle="bold" />
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="rPrice"
-            android:textColor="#000"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:paddingRight="10dp">
+            <TextView
+                android:layout_width="141dp"
+                android:layout_height="wrap_content"
+                android:text="Phone No:"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         <TextView
             android:id="@+id/sadPhoneNo"
-            android:layout_width="match_parent"
+            android:layout_width="187dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="45dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="29dp"
+            android:layout_marginRight="29dp"
             android:text="Phone No"
-            android:textColor="#000"
-            android:textSize="15sp"
+            android:textColor="#1969ea"
+            android:textSize="18sp"
             android:textStyle="bold" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="10dp">
+            <TextView
+                android:layout_width="141dp"
+                android:layout_height="wrap_content"
+                android:text="Ad Status:"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
         <TextView
             android:id="@+id/sadAdStatus"
-            android:layout_width="match_parent"
+            android:layout_width="187sp"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="45dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="29dp"
+            android:layout_marginRight="29dp"
             android:text="Ad Status"
-            android:textColor="#000"
-            android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:textColor="#1969ea"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="10dp">
+            <TextView
+                android:layout_width="141sp"
+                android:layout_height="wrap_content"
+                android:text="User Name:"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/sadUserName"
+            android:layout_width="187sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="45dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="29dp"
+            android:layout_marginRight="29dp"
+            android:text="User name"
+            android:textColor="#1969ea"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/sadImageview"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="280dp"
             android:adjustViewBounds="true"
             android:background="@drawable/internetslowdown_day"
             android:scaleType="centerCrop" />

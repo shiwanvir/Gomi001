@@ -11,6 +11,7 @@
     <string name="price">Price</string>
     <string name="location">Location</string>
     <string-array name="names">
+        <item>[Select One]</item>>
         <item>Iorn Materials</item>
         <item>Empty Bottles</item>
         <item>Papers</item>

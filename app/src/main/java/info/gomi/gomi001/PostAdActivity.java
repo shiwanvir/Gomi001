@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
@@ -61,14 +62,17 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
     Button from_gllary;
     Button seller_location;
     Button details_save;
+    Button cancelDetails;
     ImageView image;
     String pathToFile;
     Uri imageUri;
-    EditText username;
-    EditText phoneNo;
-    EditText itemName;
+    TextInputLayout username;
+    TextInputLayout phoneNo;
+    TextInputLayout itemName;
+    TextInputLayout itemTypeValidation;
+    TextInputLayout imageValidation;
     Spinner itemType;
-    EditText price;
+    TextInputLayout price;
     //EditText ad_image;
     EditText loc_latitude;
     EditText loc_longitude;
@@ -110,18 +114,26 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
         from_gllary=findViewById(R.id.from_gallary);
         seller_location=(Button) findViewById(R.id.see_location);
         details_save=(Button) findViewById(R.id.save_details);
-        username=(EditText) findViewById(R.id.your_name);
-        phoneNo=(EditText)findViewById(R.id.phone_no);
-        itemName=(EditText)findViewById(R.id.item_name);
+        cancelDetails=(Button)findViewById(R.id.cancel_details);
+        username=findViewById(R.id.your_name);
+        phoneNo=findViewById(R.id.phone_no);
+        itemName=findViewById(R.id.item_name);
         itemType=(Spinner)findViewById(R.id.item_type);
-        price=(EditText)findViewById(R.id.price);
+        price=findViewById(R.id.price);
         loc_longitude=(EditText)findViewById(R.id.loc_longitude);
         loc_latitude=(EditText)findViewById(R.id.loc_latitude);
+        itemTypeValidation=findViewById(R.id.item_Type_validation);
+        imageValidation=findViewById(R.id.image_validation);
         seller_location.setOnClickListener(this);
         details_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addDetails();
+                if(confrimationInputs()==true) {
+                    addDetails();
+                }
+                else{
+                   errorMessage();
+                }
             }
 
 
@@ -130,9 +142,8 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
         loc_longitude=(EditText)findViewById(R.id.loc_longitude);
         Spinner itemType=(Spinner) findViewById(R.id.item_type);
         ArrayAdapter<String> myadapter=new ArrayAdapter<String>(PostAdActivity.this,
-
-                android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.names));
-            myadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item,getResources().getStringArray(R.array.names));
+            myadapter.setDropDownViewResource(R.layout.spinner_item);
             itemType.setAdapter(myadapter);
 
 
@@ -159,7 +170,142 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
         });
         image=findViewById(R.id.iamge);
 
+        cancelDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
 
+    }
+    private  void errorMessage(){
+        Toasty.error(this, "Please Fill Details Correctly", Toast.LENGTH_LONG).show();
+    }
+
+    private boolean validateUserName( ){
+        String userName=username.getEditText().getText().toString().trim();
+        if(userName.isEmpty()){
+            username.setError("Filed cant't be empty ");
+            return false;
+        }
+        else if(userName.length()>20){
+            username.setError("Username too long");
+            return false;
+        }
+        else if(!userName.matches("[a-zA-Z ]+")){
+            username.setError("Incorrect Name");
+            return false;
+        }
+        else{
+            username.setError(null);
+            username.setErrorEnabled(false);
+            return true;
+        }
+
+
+    }
+    private boolean validatePhoneNo(){
+        String phoneno=phoneNo.getEditText().getText().toString().trim();
+
+        if(phoneno.isEmpty()){
+            phoneNo.setError("Filed cant't be empty ");
+            return false;
+        }
+        else if(phoneno.length()>10){
+            phoneNo.setError("Incorrect phone Number ");
+            return false;
+        }
+        else if(!(android.util.Patterns.PHONE.matcher(phoneno).matches())){
+            phoneNo.setError("phone Number contain characters");
+            return false;
+        }
+        else{
+            phoneNo.setError(null);
+            phoneNo.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validateItemName(){
+
+        String item=itemName.getEditText().getText().toString().trim();
+        if(item.isEmpty()){
+            itemName.setError("Filed cant't be empty ");
+            return false;
+        }
+        else if(item.length()>20){
+            itemName.setError("Item Name too long");
+            return false;
+        }
+        else if(!item.matches("[a-zA-Z ]+")){
+            itemName.setError("Incorrect Item Name");
+            return false;
+        }
+        else{
+            itemName.setError(null);
+            itemName.setErrorEnabled(false);
+            return true;
+        }
+
+    }
+
+    private boolean validateItemPrice(){
+        String itemprice=price.getEditText().getText().toString().trim();
+
+        if(itemprice.isEmpty()){
+            price.setError("Filed cant't be empty ");
+            return false;
+        }
+        else if(itemprice.length()>15){
+            price.setError("Incorrect Item Price");
+            return false;
+        }
+        else if(itemprice.matches("[a-zA-Z ]+")){
+            price.setError("Item Price contain characters");
+            return false;
+        }
+        else{
+            price.setError(null);
+            price.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+   private boolean itemTypeValidation(){
+        String itemtypetext=itemType.getSelectedItem().toString();
+
+        if(itemtypetext.equals("[Select One]")){
+            //Log.i(" notification Key", "now at hereeee") ;
+            itemTypeValidation.setError("please select item Type");
+
+            return false;
+        }
+        itemTypeValidation.setError(null);
+        itemTypeValidation.setErrorEnabled(false);
+        return true;
+
+
+    }
+    private boolean imageValidation(){
+        if(imageUri==null){
+            imageValidation.setError("Please Select a image");
+            return false;
+        }
+        imageValidation.setError(null);
+        imageValidation.setErrorEnabled(false);
+        return true;
+    }
+
+
+
+
+    public boolean confrimationInputs(){
+        if(!validateUserName()|!validatePhoneNo()|!validateItemName()|!validateItemPrice()|!itemTypeValidation()|!imageValidation()){
+            return false;
+        }
+        return true;
     }
 
     private void openGallary() {
@@ -170,12 +316,12 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
     private void addDetails() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
       final String userId=user.getUid();
-      String userName=username.getText().toString().trim();
+      String userName=username.getEditText().getText().toString().trim();
       final String addId=saveDeatils.push().getKey();
-      String phoneNO=phoneNo.getText().toString().trim();
-      String item=itemName.getText().toString().trim();
+      String phoneNO=phoneNo.getEditText().getText().toString().trim();
+      String item=itemName.getEditText().getText().toString().trim();
       String itemtype=itemType.getSelectedItem().toString();
-      String itemprice=price.getText().toString().trim();
+      String itemprice=price.getEditText().getText().toString().trim();
       String imagepath=pathToFile;
       String longitude=loc_longitude.getText().toString().trim();
       String latitude=loc_latitude.getText().toString().trim();
