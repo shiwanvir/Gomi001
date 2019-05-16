@@ -1,5 +1,6 @@
 package info.gomi.gomi001;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -49,6 +50,9 @@ public class MyAdsActivity extends AppCompatActivity {
         //action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("My Ads");
+        //popUp
+        //AdcencelationDialog= new Dialog(this);
+
 
 
         mSharedPref=getSharedPreferences("SortSettings",MODE_PRIVATE);

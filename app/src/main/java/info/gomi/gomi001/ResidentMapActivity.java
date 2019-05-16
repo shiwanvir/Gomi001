@@ -1,8 +1,13 @@
 package info.gomi.gomi001;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Handler;
@@ -14,6 +19,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.geofire.GeoFire;
@@ -53,6 +60,11 @@ public class ResidentMapActivity extends FragmentActivity implements OnMapReadyC
     private Button mdumpWaste;
     private LatLng pickUpLocation;
     public Marker mWasteMaker;
+        //popUp
+    Dialog AdcencelationDialog ;
+    ImageView closePopupCancelAd;
+    TextView messageTv,titleTv;
+    Button buttonAccept;
     //schedule task
     private Handler mHandler=new Handler();
 
@@ -89,12 +101,12 @@ public class ResidentMapActivity extends FragmentActivity implements OnMapReadyC
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(!dataSnapshot.exists()){
-                            Log.i(" just now i'm null", "just now i'm null" );
-                            Intent intent = getIntent();
-                            finish();
-                            startActivity(intent);
+                            //ShowPopUp();
 
-                            //getDumpedwasteAround();
+                            if(!((Activity)getappContext()).isFinishing())
+                            {
+                                ShowPopUp();
+                            }
 
                         }
                     }
@@ -219,6 +231,46 @@ private Marker mDriverMaker;
     });
 
     }
+
+    public void ShowPopUp() {
+        //popUp
+        AdcencelationDialog=new Dialog(this);
+        AdcencelationDialog.setContentView(R.layout.pop_up_dump_waste_pick);
+        closePopupCancelAd=(ImageView)AdcencelationDialog.findViewById(R.id.closePopupCancelAd);
+        buttonAccept=(Button)AdcencelationDialog.findViewById(R.id.btnAccept);
+        titleTv=(TextView)AdcencelationDialog.findViewById(R.id.titleTv);
+        messageTv=(TextView)AdcencelationDialog.findViewById(R.id.messageTv);
+        AdcencelationDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        AdcencelationDialog.show();
+
+        closePopupCancelAd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AdcencelationDialog.dismiss();
+            }
+        });
+
+
+
+        buttonAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AdcencelationDialog.dismiss();
+                //AdcencelationDialog=null;
+
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+
+            }
+        });
+
+    }
+
+    public Context getappContext(){
+        return this;
+    }
+
 
 
     @Override

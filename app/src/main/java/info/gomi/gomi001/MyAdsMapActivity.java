@@ -1,7 +1,13 @@
 package info.gomi.gomi001;
 import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +17,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.directions.route.AbstractRouting;
@@ -48,6 +56,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import es.dmoral.toasty.Toasty;
+
 public class MyAdsMapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, RoutingListener {
 
     private GoogleMap mMap;
@@ -61,11 +71,18 @@ public class MyAdsMapActivity extends FragmentActivity implements OnMapReadyCall
     Button cancelBooking;
     private List<Polyline> polylines;
     DatabaseReference notificationRef;
+    Dialog AdcencelationDialog;
+    ImageView closePopupCancelAd;
+    TextView messageTv,titleTv;
+    Button buttonAccept;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_ads_map);
+
+
         polylines = new ArrayList<>();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -83,6 +100,31 @@ public class MyAdsMapActivity extends FragmentActivity implements OnMapReadyCall
         sellerLatitude = Double.parseDouble(latitide);
         sellerLongtide = Double.parseDouble(longtide);
         sellerLocation=new LatLng(sellerLatitude,sellerLongtide);
+
+        //toListen ad Status
+        DatabaseReference adStatusLister= FirebaseDatabase.getInstance().getReference("post_ad_details").child(adId).child("adStatus");
+        adStatusLister.addValueEventListener(new ValueEventListener() {
+
+              @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                   String cahngedStatus=dataSnapshot.getValue(String.class);
+                    if(cahngedStatus.equals("available")){
+
+                        if(!((Activity)getappContext()).isFinishing())
+                        {
+                            ShowPopUp();
+                        }
+
+
+                    }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         getBuyerLoacation();
         cancelBooking.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,11 +157,11 @@ public class MyAdsMapActivity extends FragmentActivity implements OnMapReadyCall
                     }
                 });
                 //Intent intent = getIntent();
-                finish();
+               // finish();
                 //startActivity(intent);
 
-                Intent intent=new Intent(v.getContext(),MyAdsActivity.class);
-                startActivity(intent);
+                //Intent intent=new Intent(v.getContext(),MyAdsActivity.class);
+                //startActivity(intent);
             }
         });
         //getRouterToMaker(initBuyerLocation);
@@ -127,6 +169,53 @@ public class MyAdsMapActivity extends FragmentActivity implements OnMapReadyCall
         //Log.i("Int loc", "int lat" +initBuyerLocation.longitude);
     }
 
+    public void ShowPopUp() {
+
+
+        //popUp
+       AdcencelationDialog=new Dialog(this);
+
+
+        AdcencelationDialog.setContentView(R.layout.pop_up_ad_cancellation);
+        closePopupCancelAd=(ImageView)AdcencelationDialog.findViewById(R.id.closePopupCancelAd);
+        buttonAccept=(Button)AdcencelationDialog.findViewById(R.id.btnAccept);
+        titleTv=(TextView)AdcencelationDialog.findViewById(R.id.titleTv);
+        messageTv=(TextView)AdcencelationDialog.findViewById(R.id.messageTv);
+
+        AdcencelationDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        AdcencelationDialog.show();
+        closePopupCancelAd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               AdcencelationDialog.dismiss();
+            }
+        });
+
+           buttonAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AdcencelationDialog.dismiss();
+                //AdcencelationDialog=null;
+
+                finish();
+                //startActivity(intent);
+
+                Intent intent=new Intent(v.getContext(),MyAdsActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+
+
+
+    }
+
+
+    public Context getappContext(){
+        return this;
+    }
 
     /**
      * Manipulates the map once available.
@@ -155,6 +244,9 @@ public class MyAdsMapActivity extends FragmentActivity implements OnMapReadyCall
         //getRouterToMaker(initBuyerLocation);
     }
 
+    private  void errorMessage(){
+        Toasty.error(this, "Please Fill Details Correctly", Toast.LENGTH_LONG).show();
+    }
     protected  synchronized  void buildGooleApiClient(){
 
         mGoogleApiClient =new GoogleApiClient.Builder(this)
@@ -165,6 +257,8 @@ public class MyAdsMapActivity extends FragmentActivity implements OnMapReadyCall
         mGoogleApiClient.connect();
 
     }
+
+
 
     private void getRouterToMaker(LatLng initBuyerLocation) {
 
@@ -212,7 +306,7 @@ public class MyAdsMapActivity extends FragmentActivity implements OnMapReadyCall
                         mBuyerMaker.remove();
                     }
                     mBuyerMaker=mMap.addMarker(new MarkerOptions().position(buyerLatLng).title("Buyer").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_action_buyer)));
-                    //getRouterToMaker(buyerLatLng);
+                    getRouterToMaker(buyerLatLng);
                 }
 
 

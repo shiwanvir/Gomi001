@@ -4,11 +4,10 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:cardBackgroundColor="#fff"
-    app:cardCornerRadius="3dp"
+    app:cardBackgroundColor="#5e585a"
     app:cardElevation="3dp"
-    app:contentPadding="5dp"
-    app:cardUseCompatPadding="true"
+    app:contentPadding="10dp"
+    app:cardUseCompatPadding="false"
     tools:context=".MyAdsDetailsActivity">
 
 
@@ -27,7 +26,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="0dp"
                 android:text="Item Type:"
-                android:textColor="#000"
+                android:textColor="#ffff"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -57,7 +56,7 @@
                 android:layout_width="141dp"
                 android:layout_height="wrap_content"
                 android:text="Item Name:"
-                android:textColor="#000"
+                android:textColor="#ffff"
                 android:textSize="18sp"
                 android:textStyle="bold" />
             <TextView
@@ -85,7 +84,7 @@
                 android:layout_width="141dp"
                 android:layout_height="wrap_content"
                 android:text="Price:   Rs."
-                android:textColor="#000"
+                android:textColor="#ffff"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -114,7 +113,7 @@
                 android:layout_width="141dp"
                 android:layout_height="wrap_content"
                 android:text="Phone No:"
-                android:textColor="#000"
+                android:textColor="#ffff"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -143,7 +142,7 @@
                 android:layout_width="141dp"
                 android:layout_height="wrap_content"
                 android:text="Ad Status:"
-                android:textColor="#000"
+                android:textColor="#ffff"
                 android:textSize="18sp"
                 android:textStyle="bold" />
             <TextView
@@ -171,7 +170,7 @@
                 android:layout_width="141sp"
                 android:layout_height="wrap_content"
                 android:text="User Name:"
-                android:textColor="#000"
+                android:textColor="#ffff"
                 android:textSize="18sp"
                 android:textStyle="bold" />
             <TextView

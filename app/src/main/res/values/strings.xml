@@ -9,6 +9,7 @@
     <string name="from_gallary">Gallary</string>
     <string name="from_camera">Camera</string>
     <string name="price">Price</string>
+    <string name="submit">Submit</string>
     <string name="location">Location</string>
     <string-array name="names">
         <item>[Select One]</item>>
@@ -36,4 +37,15 @@
     <string name="title_activity_buyier_map">Map</string>
     <string name="title_activity_my_ads_map">Map</string>
 
+    <!--ad cancel pop up-->
+    <string name="adCancelPoppHeader">Booking Canceled!</string>
+    <string name="adCancelPoppContent">Your Advertisement Booking Canceled..</string>
+
+    <!---waste picked popup-->
+     <string name="wastePickPoppHeader">Waste Picked!</string>
+    <string name="wastePickPoppContent">Your Waste Picked By Truck..</string>
+
+    <!---Delete ad Confirmation popup-->
+    <string name="deleteAdConfirmationPoppHeader">Are You Sure!</string>
+    <string name="deleteAdConfirmationPoppContent">You want to Remove this Adverisment?</string>
 </resources>

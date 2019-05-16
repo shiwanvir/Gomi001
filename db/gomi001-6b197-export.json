@@ -1,0 +1,481 @@
+{
+  "Notifications" : {
+    "7p0w22j4YsZa9PqLMXAtl2TeTdo1" : {
+      "-LcGU3QqAMGQvYlDfKoo" : {
+        "from" : "Jbc6qtrL3OOhtrJqvlFiAH1MpTF3",
+        "type" : "booking"
+      },
+      "-LcL8K05f9Z5y-cECtAh" : {
+        "from" : "Jbc6qtrL3OOhtrJqvlFiAH1MpTF3",
+        "type" : "booking"
+      },
+      "-LcL8UZhNlaM93whXzbB" : {
+        "from" : "Jbc6qtrL3OOhtrJqvlFiAH1MpTF3",
+        "type" : "booking"
+      },
+      "-LcL8gr2aRTojdOaeWDi" : {
+        "from" : "Jbc6qtrL3OOhtrJqvlFiAH1MpTF3",
+        "type" : "booking"
+      },
+      "-LcLC3iKl-Z_ec8H1Mtq" : {
+        "from" : "Jbc6qtrL3OOhtrJqvlFiAH1MpTF3",
+        "type" : "booking"
+      },
+      "-LcLCsd9fYYAUV76wN_H" : {
+        "from" : "Jbc6qtrL3OOhtrJqvlFiAH1MpTF3",
+        "type" : "booking"
+      },
+      "-LcLFTfIf807m9dae7OK" : {
+        "from" : "Jbc6qtrL3OOhtrJqvlFiAH1MpTF3",
+        "type" : "booking"
+      },
+      "-LcLe9nisVRltuwzHUEJ" : {
+        "from" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2",
+        "type" : "booking"
+      },
+      "-LcLejZ0BbysfeeFAgDn" : {
+        "from" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2",
+        "type" : "booking"
+      },
+      "-LcLeuHOlM5tLv6E-l35" : {
+        "from" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2",
+        "type" : "booking"
+      },
+      "-LcLfO9ViYidlFO0XOQ0" : {
+        "from" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2",
+        "type" : "booking"
+      },
+      "-LcLfY385hvNF82q_xeX" : {
+        "from" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2",
+        "type" : "booking"
+      },
+      "-LcLfZwLdN872VBJjNSK" : {
+        "from" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2",
+        "type" : "booking"
+      },
+      "-LcLfesaczlvEORCyncu" : {
+        "from" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2",
+        "type" : "booking"
+      },
+      "-LcLhTP6d93MU_MCHId3" : {
+        "from" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2",
+        "type" : "booking"
+      },
+      "-LcLhUq87PlTxjKnDhhI" : {
+        "from" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2",
+        "type" : "booking"
+      },
+      "-LcLhX17VKTMSq-_3jJV" : {
+        "from" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2",
+        "type" : "booking"
+      }
+    }
+  },
+  "Users" : {
+    "Customers" : {
+      "3TnxbFqpldYmaLEoNYIOjFy1GmH3" : {
+        "device_token" : "fv0AguLrZ3Q:APA91bHu-usF-hIoW3LWsKDe3yNbBeDp9IrShsOe5ALGql9BzlRdGwjwKkDhYcQGJlxzC4CvzcMqI9MUshY_N6Se3Ry9Rsl8V5Pmh44EC-L3wAgPmjC-wryYS5UxgnjFRrGAw5v18Bh6",
+        "notificationKey" : "a7de7607-448c-496a-8b2b-8036887834b0"
+      },
+      "3nRNAm9rQQW81VA7JtuoiW3lnjM2" : {
+        "device_token" : "fv0AguLrZ3Q:APA91bHu-usF-hIoW3LWsKDe3yNbBeDp9IrShsOe5ALGql9BzlRdGwjwKkDhYcQGJlxzC4CvzcMqI9MUshY_N6Se3Ry9Rsl8V5Pmh44EC-L3wAgPmjC-wryYS5UxgnjFRrGAw5v18Bh6",
+        "notificationKey" : "a7de7607-448c-496a-8b2b-8036887834b0"
+      },
+      "AQRVvwRBzLW7wcptp8teXAM6xXA3" : true,
+      "CeSzRWsBb1aPdOHiMXbULzTjl5f2" : {
+        "device_token" : "fCSo4N8aUC0:APA91bHed8BhZFDcnO7fjRac-UxH5u-T90NInC-VX83TjYUNmMqA2bpa9nNNjjO4StCuV-CLp7ot21gFLNud_Hi6cxhMGCfdVmK8n9ah6jiyCAf10gyyw-6yuxXQpNgyLgqIkul0sVuE",
+        "notificationKey" : "8cce8638-eb09-4620-b08d-1e5064876424"
+      },
+      "KqicvqWumicAeBkqYUpAYm8Qr6t1" : {
+        "device_token" : "fCSo4N8aUC0:APA91bHed8BhZFDcnO7fjRac-UxH5u-T90NInC-VX83TjYUNmMqA2bpa9nNNjjO4StCuV-CLp7ot21gFLNud_Hi6cxhMGCfdVmK8n9ah6jiyCAf10gyyw-6yuxXQpNgyLgqIkul0sVuE",
+        "notificationKey" : "8cce8638-eb09-4620-b08d-1e5064876424"
+      },
+      "P0xxUMySShYoBN5sHgrsYbkMQk83" : {
+        "device_token" : "chEPdUhGhVM:APA91bEBSKw8v-ye51DufviUHiz5cnXvOwFHsOWIdwB4fdj9nnwZ4wNLLZ1VFSMsf0hLTi5EGTG3dQsvnVsKv_NPegzcZwvlPcZbEMgikfHANB9vFb0SPn7AO-pCpwvl67aRoa6vR0Lt",
+        "notificationKey" : "50137511-fe07-4ab2-9dbb-c2b4fa1acbf9"
+      },
+      "TQ3P07zfYxZr9fvwOMkU2qA5py42" : {
+        "device_token" : "fCSo4N8aUC0:APA91bHed8BhZFDcnO7fjRac-UxH5u-T90NInC-VX83TjYUNmMqA2bpa9nNNjjO4StCuV-CLp7ot21gFLNud_Hi6cxhMGCfdVmK8n9ah6jiyCAf10gyyw-6yuxXQpNgyLgqIkul0sVuE",
+        "notificationKey" : "8cce8638-eb09-4620-b08d-1e5064876424"
+      },
+      "VG5mO6af9ZZuYsYxJSo5hw94ybO2" : {
+        "device_token" : "chEPdUhGhVM:APA91bEBSKw8v-ye51DufviUHiz5cnXvOwFHsOWIdwB4fdj9nnwZ4wNLLZ1VFSMsf0hLTi5EGTG3dQsvnVsKv_NPegzcZwvlPcZbEMgikfHANB9vFb0SPn7AO-pCpwvl67aRoa6vR0Lt",
+        "notificationKey" : "50137511-fe07-4ab2-9dbb-c2b4fa1acbf9"
+      },
+      "Zs5Ug403nKfv9XL2MJFovUWXJss2" : {
+        "device_token" : "fv0AguLrZ3Q:APA91bHu-usF-hIoW3LWsKDe3yNbBeDp9IrShsOe5ALGql9BzlRdGwjwKkDhYcQGJlxzC4CvzcMqI9MUshY_N6Se3Ry9Rsl8V5Pmh44EC-L3wAgPmjC-wryYS5UxgnjFRrGAw5v18Bh6",
+        "notificationKey" : "a7de7607-448c-496a-8b2b-8036887834b0"
+      },
+      "b5rkl7MDkDMpCMNytAsdGPBi06t1" : {
+        "device_token" : "fCSo4N8aUC0:APA91bHed8BhZFDcnO7fjRac-UxH5u-T90NInC-VX83TjYUNmMqA2bpa9nNNjjO4StCuV-CLp7ot21gFLNud_Hi6cxhMGCfdVmK8n9ah6jiyCAf10gyyw-6yuxXQpNgyLgqIkul0sVuE",
+        "notificationKey" : "8cce8638-eb09-4620-b08d-1e5064876424"
+      },
+      "yIPIdbwMQET7RDFfkCI5kd38tWw1" : {
+        "device_token" : "fCSo4N8aUC0:APA91bHed8BhZFDcnO7fjRac-UxH5u-T90NInC-VX83TjYUNmMqA2bpa9nNNjjO4StCuV-CLp7ot21gFLNud_Hi6cxhMGCfdVmK8n9ah6jiyCAf10gyyw-6yuxXQpNgyLgqIkul0sVuE",
+        "notificationKey" : "8cce8638-eb09-4620-b08d-1e5064876424"
+      }
+    },
+    "Drivers" : {
+      "KqicvqWumicAeBkqYUpAYm8Qr6t1" : true,
+      "ep8hchldL1UFdguFsKSLvyqQu9m1" : true
+    }
+  },
+  "bookedAdDetails" : {
+    "-LbP-zxSs1UOkKoob2zc" : {
+      "adId" : "-LbOojA6Fejv--fwjMVk",
+      "buyerId" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2",
+      "sellerId" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2"
+    },
+    "-LbSF8pRaRe8a5omULvo" : {
+      "adId" : "-LbOojA6Fejv--fwjMVk",
+      "buyerId" : "P0xxUMySShYoBN5sHgrsYbkMQk83",
+      "sellerId" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2"
+    }
+  },
+  "buyersAvailable" : {
+    "3nRNAm9rQQW81VA7JtuoiW3lnjM2" : {
+      ".priority" : "tc2b6mrvur",
+      "g" : "tc2b6mrvur",
+      "l" : [ 7.1050633, 79.9144 ]
+    },
+    "CeSzRWsBb1aPdOHiMXbULzTjl5f2" : {
+      ".priority" : "tc2b6mrvur",
+      "g" : "tc2b6mrvur",
+      "l" : [ 7.1050633, 79.9144 ]
+    },
+    "Jbc6qtrL3OOhtrJqvlFiAH1MpTF3" : {
+      ".priority" : "tc2b5mrf8z",
+      "g" : "tc2b5mrf8z",
+      "l" : [ 7.06056, 79.958195 ]
+    },
+    "KqicvqWumicAeBkqYUpAYm8Qr6t1" : {
+      ".priority" : "tc0zfrzut8",
+      "g" : "tc0zfrzut8",
+      "l" : [ 7.0306517, 79.9144467 ]
+    },
+    "P0xxUMySShYoBN5sHgrsYbkMQk83" : {
+      ".priority" : "tc2b7mxbch",
+      "g" : "tc2b7mxbch",
+      "l" : [ 7.1055583, 79.9582 ]
+    },
+    "VG5mO6af9ZZuYsYxJSo5hw94ybO2" : {
+      ".priority" : "tc2b5mrf8z",
+      "g" : "tc2b5mrf8z",
+      "l" : [ 7.06056, 79.958195 ]
+    },
+    "ep8hchldL1UFdguFsKSLvyqQu9m1" : {
+      ".priority" : "tc0zfrzut8",
+      "g" : "tc0zfrzut8",
+      "l" : [ 7.0306517, 79.9144467 ]
+    },
+    "yOEmvMQjaNW8SfkxyEzWc5awMaw1" : {
+      ".priority" : "tc2b5mrf8z",
+      "g" : "tc2b5mrf8z",
+      "l" : [ 7.06056, 79.958195 ]
+    }
+  },
+  "contact_us_details" : {
+    "-LdZeTzDnwjFmM_o-m1_" : {
+      "email" : "adad",
+      "message" : "",
+      "phoneNo" : "",
+      "subject" : "",
+      "userId" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2"
+    },
+    "-LdZeaWo2wpzcv_gvVLA" : {
+      "email" : "adad",
+      "message" : "addadada",
+      "phoneNo" : "232323232",
+      "subject" : "edqadadad",
+      "userId" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2"
+    },
+    "-LdZtsJlJzkZaR2-Ql9u" : {
+      "email" : "gomiwaste1510@gmail.com",
+      "message" : "xasdcadadad",
+      "phoneNo" : "32323",
+      "subject" : "dadada",
+      "userId" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2"
+    },
+    "-Ld_9VlxItkIDD_suXxN" : {
+      "email" : "gomiwaste1510@gmail.com",
+      "message" : "adadadad",
+      "phoneNo" : "033233123",
+      "subject" : "thanks",
+      "userId" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2"
+    }
+  },
+  "dumpWaste" : {
+    "3TnxbFqpldYmaLEoNYIOjFy1GmH3" : {
+      ".priority" : "tc2bkf0wtf",
+      "g" : "tc2bkf0wtf",
+      "l" : [ 7.08731, 80.014365 ]
+    },
+    "3nRNAm9rQQW81VA7JtuoiW3lnjM2" : {
+      ".priority" : "tc0zdd3heq",
+      "g" : "tc0zdd3heq",
+      "l" : [ 6.956525, 79.916065 ]
+    },
+    "Zs5Ug403nKfv9XL2MJFovUWXJss2" : {
+      ".priority" : "tc0zdd3jh3",
+      "g" : "tc0zdd3jh3",
+      "l" : [ 6.9565841, 79.9161094 ]
+    }
+  },
+  "pickedWaste" : {
+    ".priority" : "tc2b47xch2",
+    "3nRNAm9rQQW81VA7JtuoiW3lnjM2" : {
+      ".priority" : "tc2b7mxbch",
+      "g" : "tc2b7mxbch",
+      "l" : [ 7.1055583, 79.9582 ]
+    },
+    "CeSzRWsBb1aPdOHiMXbULzTjl5f2" : {
+      ".priority" : "tc2b5mrf8z",
+      "g" : "tc2b5mrf8z",
+      "l" : [ 7.06056, 79.958195 ]
+    },
+    "P0xxUMySShYoBN5sHgrsYbkMQk83" : {
+      ".priority" : "tc2b6mrvur",
+      "g" : "tc2b6mrvur",
+      "l" : [ 7.1050633, 79.9144 ]
+    },
+    "c0oAAueZw5QyxZJy7Z8G6UeGIas1" : {
+      ".priority" : "tc2b7mxbch",
+      "g" : "tc2b7mxbch",
+      "l" : [ 7.1055583, 79.9582 ]
+    },
+    "g" : "tc2b47xch2",
+    "l" : [ 7.05065, 79.9144 ],
+    "yIPIdbwMQET7RDFfkCI5kd38tWw1" : {
+      ".priority" : "tc2b7mxbch",
+      "g" : "tc2b7mxbch",
+      "l" : [ 7.1055583, 79.9582 ]
+    },
+    "yOEmvMQjaNW8SfkxyEzWc5awMaw1" : {
+      ".priority" : "tc2b5mrf8z",
+      "g" : "tc2b5mrf8z",
+      "l" : [ 7.06056, 79.958195 ]
+    }
+  },
+  "post_ad_details" : {
+    "-LbScAl9_7GAyJ7eyOrq" : {
+      "adImageUrl" : "https://firebasestorage.googleapis.com/v0/b/gomi001-6b197.appspot.com/o/images%2F-LbScAl9_7GAyJ7eyOrq?alt=media&token=203bfb63-30d8-4410-9621-9a8ed51e045a",
+      "adStatus" : "available",
+      "buyerId" : "null",
+      "image" : "/storage/emulated/0/Pictures/20190702_1607154270016996196490383.jpg",
+      "itemName" : "bookes",
+      "itemType" : "Papers",
+      "latitide" : "7.20228",
+      "longtide" : "80.1008",
+      "phoneNo" : "+15555215554",
+      "postAdId" : "-LbScAl9_7GAyJ7eyOrq",
+      "price" : "8500",
+      "search" : "papers",
+      "userId" : "P0xxUMySShYoBN5sHgrsYbkMQk83",
+      "userName" : "jhon"
+    },
+    "-LbScRSKTFqJT6XVQoKi" : {
+      "adImageUrl" : "https://firebasestorage.googleapis.com/v0/b/gomi001-6b197.appspot.com/o/images%2F-LbScRSKTFqJT6XVQoKi?alt=media&token=8e82b6a2-f2bd-4ff1-9bcd-889fb4653710",
+      "adStatus" : "available",
+      "buyerId" : "null",
+      "image" : "/storage/emulated/0/Pictures/20190802_160829451116239980751566.jpg",
+      "itemName" : "mettel",
+      "itemType" : "Iorn Materials",
+      "latitide" : "7.20228",
+      "longtide" : "80.1008",
+      "phoneNo" : "+15555215554",
+      "postAdId" : "-LbScRSKTFqJT6XVQoKi",
+      "price" : "2500",
+      "search" : "iorn materials",
+      "userId" : "P0xxUMySShYoBN5sHgrsYbkMQk83",
+      "userName" : "lokshaa"
+    },
+    "-LbScc3ggLn0i2C9rL7-" : {
+      "adImageUrl" : "https://firebasestorage.googleapis.com/v0/b/gomi001-6b197.appspot.com/o/images%2F-LbScc3ggLn0i2C9rL7-?alt=media&token=9085e817-4311-44a4-a57a-4d7f965aeed2",
+      "adStatus" : "Booked",
+      "buyerId" : "ep8hchldL1UFdguFsKSLvyqQu9m1",
+      "image" : "/storage/emulated/0/Pictures/20190902_1609108611165319437145851.jpg",
+      "itemName" : "mettel",
+      "itemType" : "Papers",
+      "latitide" : "7.20228",
+      "longtide" : "80.1008",
+      "phoneNo" : "+15555215554",
+      "postAdId" : "-LbScc3ggLn0i2C9rL7-",
+      "price" : "100",
+      "search" : "papers",
+      "userId" : "P0xxUMySShYoBN5sHgrsYbkMQk83",
+      "userName" : "shanee"
+    },
+    "-LbUEsdwDj0Jf_hWNhBm" : {
+      "adImageUrl" : "https://firebasestorage.googleapis.com/v0/b/gomi001-6b197.appspot.com/o/images%2F-LbUEsdwDj0Jf_hWNhBm?alt=media&token=bec2e121-340c-4afd-be97-42a20a2fb5f1",
+      "adStatus" : "available",
+      "buyerId" : "null",
+      "image" : "/storage/emulated/0/Pictures/20194002_2340204316611607669708604.jpg",
+      "itemName" : "Books",
+      "itemType" : "Papers",
+      "latitide" : "7.20228",
+      "longtide" : "80.1008",
+      "phoneNo" : "0123332545",
+      "postAdId" : "-LbUEsdwDj0Jf_hWNhBm",
+      "price" : "4580",
+      "search" : "papers",
+      "userId" : "P0xxUMySShYoBN5sHgrsYbkMQk83",
+      "userName" : "susuil"
+    },
+    "-LbUMwZ-9s0Ww_35Rb2v" : {
+      "adImageUrl" : "https://firebasestorage.googleapis.com/v0/b/gomi001-6b197.appspot.com/o/images%2F-LbUMwZ-9s0Ww_35Rb2v?alt=media&token=7b05cafc-4734-46cb-83ac-1646d3731846",
+      "adStatus" : "available",
+      "buyerId" : "null",
+      "image" : "/storage/emulated/0/Pictures/20191503_001539136495054009979760.jpg",
+      "itemName" : "bottles",
+      "itemType" : "Empty Bottles",
+      "latitide" : "7.20228",
+      "longtide" : "80.1008",
+      "phoneNo" : "01123456",
+      "postAdId" : "-LbUMwZ-9s0Ww_35Rb2v",
+      "price" : "14033",
+      "search" : "empty bottles",
+      "userId" : "P0xxUMySShYoBN5sHgrsYbkMQk83",
+      "userName" : "chamika"
+    },
+    "-LbWyUwHUEz2xu9TYsXX" : {
+      "adImageUrl" : "https://firebasestorage.googleapis.com/v0/b/gomi001-6b197.appspot.com/o/images%2F-LbWyUwHUEz2xu9TYsXX?alt=media&token=6ae09f96-b3bf-4bdc-be11-524fa884a667",
+      "adStatus" : "Booked",
+      "buyerId" : "ep8hchldL1UFdguFsKSLvyqQu9m1",
+      "image" : "/storage/emulated/0/Pictures/20192303_1223204530216471824146267.jpg",
+      "itemName" : "old book tos",
+      "itemType" : "Papers",
+      "latitide" : "7.20228",
+      "longtide" : "80.1008",
+      "phoneNo" : "+15555215554",
+      "postAdId" : "-LbWyUwHUEz2xu9TYsXX",
+      "price" : "4789",
+      "search" : "papers",
+      "userId" : "KqicvqWumicAeBkqYUpAYm8Qr6t1",
+      "userName" : "visal"
+    },
+    "-LbYLtk_v0iD4Hh2ZgE_" : {
+      "adImageUrl" : "https://firebasestorage.googleapis.com/v0/b/gomi001-6b197.appspot.com/o/images%2F-LbYLtk_v0iD4Hh2ZgE_?alt=media&token=227eef97-3c90-4864-a118-2f46239d4e26",
+      "adStatus" : "Booked",
+      "buyerId" : "ep8hchldL1UFdguFsKSLvyqQu9m1",
+      "image" : "/storage/emulated/0/Pictures/20194903_1849152852670302360132902.jpg",
+      "itemName" : "bottles",
+      "itemType" : "Empty Bottles",
+      "latitide" : "7.20228",
+      "longtide" : "80.1008",
+      "phoneNo" : "+15555215554",
+      "postAdId" : "-LbYLtk_v0iD4Hh2ZgE_",
+      "price" : "2500",
+      "search" : "empty bottles",
+      "userId" : "KqicvqWumicAeBkqYUpAYm8Qr6t1",
+      "userName" : "prasad"
+    },
+    "-LbYbSzmLNoH0olbcent" : {
+      "adImageUrl" : "https://firebasestorage.googleapis.com/v0/b/gomi001-6b197.appspot.com/o/images%2F-LbYbSzmLNoH0olbcent?alt=media&token=fd5a0077-ed3d-4b39-b1cb-4116cefcfff5",
+      "adStatus" : "Booked",
+      "buyerId" : "ep8hchldL1UFdguFsKSLvyqQu9m1",
+      "image" : "/storage/emulated/0/Pictures/20190103_2001547968957233417585565.jpg",
+      "itemName" : "old byke",
+      "itemType" : "Iorn Materials",
+      "latitide" : "7.0918317",
+      "longtide" : "79.9947817",
+      "phoneNo" : "0124896422",
+      "postAdId" : "-LbYbSzmLNoH0olbcent",
+      "price" : "2500",
+      "search" : "iorn materials",
+      "userId" : "KqicvqWumicAeBkqYUpAYm8Qr6t1",
+      "userName" : "chiranga"
+    },
+    "-LcGSPrOpl-22AzOkHoo" : {
+      "adImageUrl" : "https://firebasestorage.googleapis.com/v0/b/gomi001-6b197.appspot.com/o/images%2F-LcGSPrOpl-22AzOkHoo?alt=media&token=1bea8e09-5d82-4e7f-a91b-f25e91b84425",
+      "adStatus" : "Booked",
+      "buyerId" : "P0xxUMySShYoBN5sHgrsYbkMQk83",
+      "image" : "/storage/emulated/0/Pictures/20193912_1739257637277106863472275.jpg",
+      "itemName" : "old car",
+      "itemType" : "Iorn Materials",
+      "latitide" : "7.0306517",
+      "longtide" : "79.9144467",
+      "phoneNo" : "012562310",
+      "postAdId" : "-LcGSPrOpl-22AzOkHoo",
+      "price" : "50000",
+      "search" : "iorn materials",
+      "userId" : "7p0w22j4YsZa9PqLMXAtl2TeTdo1",
+      "userName" : "bimal jayakody"
+    },
+    "-LcXVhi2AkH52oFQU3KM" : {
+      "adImageUrl" : "https://firebasestorage.googleapis.com/v0/b/gomi001-6b197.appspot.com/o/images%2F-LcXVhi2AkH52oFQU3KM?alt=media&token=898f21af-1b02-46da-bf4d-2aa7b0349f4e",
+      "adStatus" : "available",
+      "buyerId" : "null",
+      "itemName" : "old metal",
+      "itemType" : "Iorn Materials",
+      "latitide" : "7.0306517",
+      "longtide" : "79.9144467",
+      "phoneNo" : "0123645",
+      "postAdId" : "-LcXVhi2AkH52oFQU3KM",
+      "price" : "2500",
+      "search" : "iorn materials",
+      "userId" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2",
+      "userName" : "sunil perera"
+    },
+    "-LcXkwKJQ8Fh8zj3Tv2i" : {
+      "adImageUrl" : "https://firebasestorage.googleapis.com/v0/b/gomi001-6b197.appspot.com/o/images%2F-LcXkwKJQ8Fh8zj3Tv2i?alt=media&token=4aefcc4f-894c-494a-b1cb-27f6d70f9d6a",
+      "adStatus" : "available",
+      "buyerId" : "null",
+      "itemName" : "Empty bottles",
+      "itemType" : "Empty Bottles",
+      "latitide" : "7.0306517",
+      "longtide" : "79.9144467",
+      "phoneNo" : "+15555215554",
+      "postAdId" : "-LcXkwKJQ8Fh8zj3Tv2i",
+      "price" : "2500",
+      "search" : "empty bottles",
+      "userId" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2",
+      "userName" : "priyantha"
+    },
+    "-LdDcQSw7Usg1b1wu480" : {
+      "adImageUrl" : "https://firebasestorage.googleapis.com/v0/b/gomi001-6b197.appspot.com/o/images%2F-LdDcQSw7Usg1b1wu480?alt=media&token=ee175838-4da6-4e05-a2f2-c092089e8170",
+      "adStatus" : "available",
+      "buyerId" : "null",
+      "image" : "/storage/emulated/0/Pictures/20194524_1445295382549332835817470.jpg",
+      "itemName" : "sasas",
+      "itemType" : "Empty Bottles",
+      "latitide" : "7.1050633",
+      "longtide" : "79.9144",
+      "phoneNo" : "0124568875",
+      "postAdId" : "-LdDcQSw7Usg1b1wu480",
+      "price" : "250",
+      "search" : "empty bottles",
+      "userId" : "CeSzRWsBb1aPdOHiMXbULzTjl5f2",
+      "userName" : "siran"
+    },
+    "-LdDdCuz0PfEX_B_uLYC" : {
+      "adImageUrl" : "https://firebasestorage.googleapis.com/v0/b/gomi001-6b197.appspot.com/o/images%2F-LdDdCuz0PfEX_B_uLYC?alt=media&token=a072cc54-bd4b-4be1-80fe-9c4c644307e4",
+      "adStatus" : "available",
+      "buyerId" : "null",
+      "itemName" : "old car",
+      "itemType" : "Iorn Materials",
+      "latitide" : "7.1050633",
+      "longtide" : "79.9144",
+      "phoneNo" : "0114589632",
+      "postAdId" : "-LdDdCuz0PfEX_B_uLYC",
+      "price" : "48000",
+      "search" : "iorn materials",
+      "userId" : "CeSzRWsBb1aPdOHiMXbULzTjl5f2",
+      "userName" : "vishwa"
+    },
+    "-LedaNjRLBGeutj9Db0C" : {
+      "adImageUrl" : "https://firebasestorage.googleapis.com/v0/b/gomi001-6b197.appspot.com/o/images%2F-LedaNjRLBGeutj9Db0C?alt=media&token=86289ad5-2f8e-4ca1-bcad-00dd66c34053",
+      "adStatus" : "Booked",
+      "buyerId" : "P0xxUMySShYoBN5sHgrsYbkMQk83",
+      "itemName" : "news papers",
+      "itemType" : "Papers",
+      "latitide" : "7.1050633",
+      "longtide" : "79.9144",
+      "phoneNo" : "0112345582",
+      "postAdId" : "-LedaNjRLBGeutj9Db0C",
+      "price" : "1200",
+      "search" : "papers",
+      "userId" : "3nRNAm9rQQW81VA7JtuoiW3lnjM2",
+      "userName" : "gayan udupila"
+    }
+  }
+}

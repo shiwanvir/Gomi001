@@ -13,17 +13,21 @@
         android:layout_height="match_parent"/>
 
 
+
+
     <Button
         android:id="@+id/cancel_booking"
         android:layout_width="match_parent"
         android:layout_height="32dp"
         android:layout_gravity="bottom"
-        android:background="@color/colorPrimary"
-        android:paddingBottom="1dp"
+        android:background="@drawable/mybuttondelete"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:paddingTop="1dp"
-        android:text="@string/cancel_booking"
+        android:text="@string/cancel_bookig"
         android:textAllCaps="true"
         android:layout_alignParentRight="true"
         android:textColor="@android:color/white"

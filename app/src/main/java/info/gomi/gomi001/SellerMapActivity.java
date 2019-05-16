@@ -24,6 +24,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SellerMapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
@@ -33,6 +35,9 @@ public class SellerMapActivity extends FragmentActivity implements OnMapReadyCal
     LocationRequest mLocationRequest;
     public static double latitude;
     public  static double  longitude;
+
+
+
 
 
     @Override

@@ -53,7 +53,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     Intent i;
                 int id=item.getItemId();
                 if(id==R.id.myAds){
-                    Toast.makeText(HomeActivity.this,"My Ads",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(HomeActivity.this,"My Ads",Toast.LENGTH_SHORT).show();
                     StratMyAds();
                 }
                 else if(id==R.id.settings){
@@ -61,8 +61,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                 }
                 else if (id==R.id.contactUs){
-                    Toast.makeText(HomeActivity.this,"Contact US",Toast.LENGTH_SHORT).show();
-
+                    //Toast.makeText(HomeActivity.this,"Contact US",Toast.LENGTH_SHORT).show();
+                    StratContactUsActivity();
                 }
                 else if(id==R.id.logOut){
 
@@ -101,6 +101,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
+    private void StratContactUsActivity(){
+
+        Intent intent=new Intent(this,ContatctUSActivity.class);
+        startActivity(intent);
+    }
     private void StratMyAds(){
 
         Intent intent = new Intent(this, MyAdsActivity.class);

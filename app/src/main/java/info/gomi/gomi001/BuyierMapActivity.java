@@ -1,8 +1,14 @@
 package info.gomi.gomi001;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +19,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.directions.route.AbstractRouting;
@@ -64,16 +72,34 @@ public class BuyierMapActivity extends FragmentActivity implements OnMapReadyCal
     Button cancelBooking;
     DatabaseReference notificationRef;
 
+    Dialog AdcencelationDialog ;
+    ImageView closePopupCancelAd;
+    TextView messageTv,titleTv;
+    Button buttonAccept;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_buyier_map);
         polylines = new ArrayList<>();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        //popUp
 
+
+        //if(AdcencelationDialog==null){
+
+          //  AdcencelationDialog=new Dialog(this);
+        //}
         //create notification ref
         notificationRef=FirebaseDatabase.getInstance().getReference().child("Notifications");
         userId = getIntent().getStringExtra("userId");
@@ -87,7 +113,10 @@ public class BuyierMapActivity extends FragmentActivity implements OnMapReadyCal
         buyerStartJourny=findViewById(R.id.start_buyer_journey);
         cancelBooking=findViewById(R.id.cancel_booking);
        sellerLocation=new LatLng(sellerLatitude,sellerLongtide);
-        
+
+
+
+
         buyerStartJourny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,6 +169,36 @@ public class BuyierMapActivity extends FragmentActivity implements OnMapReadyCal
                 //Log.i(" user id", "user id" + userId);
 
 
+                //POPUP FOR  AD CANCELLATION
+
+                //toListen ad Status
+                DatabaseReference adStatusLister= FirebaseDatabase.getInstance().getReference("post_ad_details").child(adId).child("adStatus");
+                adStatusLister.addValueEventListener(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        String cahngedStatus=dataSnapshot.getValue(String.class);
+                        if(cahngedStatus.equals("available")){
+
+                            //ShowPopUp();
+
+                            if(!((Activity)getappContext()).isFinishing())
+                            {
+                                ShowPopUp();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
 
             }
         });
@@ -147,11 +206,7 @@ public class BuyierMapActivity extends FragmentActivity implements OnMapReadyCal
         cancelBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final FirebaseDatabase database=FirebaseDatabase.getInstance();
-                DatabaseReference  ref= database.getReference();
-                DatabaseReference refForSeller=ref.child("post_ad_details").child(adId );
-                refForSeller.child("buyerId").setValue("null");
-                refForSeller.child("adStatus").setValue("available");
+
                 //get notification key of seller
                 DatabaseReference  notiref= FirebaseDatabase.getInstance().getReference();
                 DatabaseReference senNotificationToseller=notiref.child("Users").child("Customers").child(userId).child("notificationKey");
@@ -168,9 +223,19 @@ public class BuyierMapActivity extends FragmentActivity implements OnMapReadyCal
 
                     }
                 });
-                Intent intent=new Intent(v.getContext(),SearchAdActivity.class);
-                finish();
-                startActivity(intent);
+
+                final FirebaseDatabase database=FirebaseDatabase.getInstance();
+                DatabaseReference  ref= database.getReference();
+                DatabaseReference refForSeller=ref.child("post_ad_details").child(adId );
+                refForSeller.child("buyerId").setValue("null");
+                refForSeller.child("adStatus").setValue("available");
+
+
+
+
+                //Intent intent=new Intent(v.getContext(),SearchAdActivity.class);
+                //finish();
+                //startActivity(intent);
             }
         });
 
@@ -188,6 +253,47 @@ public class BuyierMapActivity extends FragmentActivity implements OnMapReadyCal
                 .build();
         routing.execute();
 
+    }
+
+    public void ShowPopUp() {
+        //popUp
+        AdcencelationDialog=new Dialog(this);
+        AdcencelationDialog.setContentView(R.layout.pop_up_ad_cancellation);
+        closePopupCancelAd=(ImageView)AdcencelationDialog.findViewById(R.id.closePopupCancelAd);
+        buttonAccept=(Button)AdcencelationDialog.findViewById(R.id.btnAccept);
+        titleTv=(TextView)AdcencelationDialog.findViewById(R.id.titleTv);
+        messageTv=(TextView)AdcencelationDialog.findViewById(R.id.messageTv);
+        AdcencelationDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        AdcencelationDialog.show();
+
+        closePopupCancelAd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AdcencelationDialog.dismiss();
+            }
+        });
+
+
+
+        buttonAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AdcencelationDialog.dismiss();
+                //AdcencelationDialog=null;
+
+                finish();
+                //startActivity(intent);
+
+                Intent intent=new Intent(v.getContext(),SearchAdActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+    }
+
+    public Context getappContext(){
+        return this;
     }
 
     private Marker mBuyerMaker;
