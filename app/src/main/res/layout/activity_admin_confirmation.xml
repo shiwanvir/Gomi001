@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     android:fitsSystemWindows="true"
-    tools:context=".ProfileActivity">
+    tools:context=".AdminConfirmationActivity">
 
 
 
@@ -24,60 +24,30 @@
             android:orientation="vertical">
 
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:id="@+id/profileImage"
-                android:src="@drawable/placeholderprofilepic"
-                app:civ_border_width="3dp"
-                app:civ_border_color="@color/colorWhite"
-                />
+
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/EditTextHint"
-                android:id="@+id/user_name"
+                android:layout_marginTop="200dp"
+                android:id="@+id/admin_password"
                 app:errorEnabled="true"
                 app:counterEnabled="true"
                 app:counterMaxLength="50"
                 >
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/editTextuserName"
+                    android:id="@+id/adminEditTextPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="your Name"
+                    android:hint="Enter the password"
                     android:textSize="20sp"
                     android:textColor="#fff"
-                    android:inputType="text"
+                    android:inputType="textPassword"
 
                     />
 
             </android.support.design.widget.TextInputLayout>
-
-
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/EditTextHint"
-                android:id="@+id/phone_no"
-                app:errorEnabled="true"
-                app:counterEnabled="true"
-                app:counterMaxLength="10">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/ediTextphoneNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Phone No:"
-                    android:textSize="20sp"
-                    android:textColor="#fff"
-                    android:inputType="phone"/>
-            </android.support.design.widget.TextInputLayout>
-
-
 
 
             <LinearLayout
@@ -86,7 +56,7 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp">
                 <Button
-                    android:id="@+id/save_details"
+                    android:id="@+id/admin_confirm"
                     android:background="@drawable/mybutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -94,22 +64,9 @@
                     android:textSize="12sp"
                     android:textAllCaps="true"
                     android:layout_marginBottom="10dp"
-                    android:text="@string/submit"
+                    android:text="@string/confrim"
                     android:textColor="@android:color/white"
                     android:layout_marginRight="10dp"/>
-
-                <Button
-                    android:id="@+id/cancel_details"
-                    android:background="@drawable/mybuttondelete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="12sp"
-                    android:text="Cancel"
-                    android:textAllCaps="true"
-                    android:layout_marginBottom="10dp"
-                    android:textColor="@android:color/white"
-                    />
 
 
 
@@ -119,4 +76,8 @@
 
         </LinearLayout>
     </ScrollView>
+
+
+
+
 </android.support.design.widget.CoordinatorLayout>

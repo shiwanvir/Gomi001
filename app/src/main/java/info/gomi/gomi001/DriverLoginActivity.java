@@ -17,10 +17,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.onesignal.OneSignal;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
@@ -30,6 +36,7 @@ public class DriverLoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
     private DatabaseReference deviceTokenRef;
+    private DatabaseReference userStatusRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +49,16 @@ public class DriverLoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
                 if(user!=null){
-
                     Intent intent=new Intent(DriverLoginActivity.this,HomeActivity.class);
                     startActivity(intent);
                     finish();
                     return;
-                }
+
+               }
 
             }
         };
+
 
         mEmail=findViewById(R.id.email);
         mPassord=findViewById(R.id.password);
@@ -60,22 +68,29 @@ public class DriverLoginActivity extends AppCompatActivity {
         mRegistrtation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //get values from text filds
                 final String emil = mEmail.getEditText().getText().toString();
                 final String password = mPassord.getEditText().getText().toString();
+                //check validation
                 if(!confermationValidate()){
                     Toasty.error(DriverLoginActivity.this, "Please fill Details correctly..", Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    //create new user in firebase
                 mAuth.createUserWithEmailAndPassword(emil, password).addOnCompleteListener(DriverLoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
 
-                            Toasty.error(DriverLoginActivity.this, "Sign Up Error", Toast.LENGTH_SHORT).show();
+                            String ErrorMessage=task.getException().getMessage();
+                            Toasty.error(DriverLoginActivity.this, "Error Occurred While Registering:"+ErrorMessage, Toast.LENGTH_SHORT, true).show();
                         } else {
                             String userId = mAuth.getCurrentUser().getUid();
                             DatabaseReference DbRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(userId);
                             DbRef.setValue(true);
+                            Map userRole=new HashMap();
+                            userRole.put("userRole","driv");
+                            DbRef.updateChildren(userRole);
                             String deviceToken= FirebaseInstanceId.getInstance().getToken();
                             deviceTokenRef.child(userId).child("device_token")
                                     .setValue(deviceToken).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -86,7 +101,7 @@ public class DriverLoginActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-
+                            //creaet reffernec for one signal api
                             OneSignal.startInit(DriverLoginActivity.this).init();
                             //subscribe user for the service
                             OneSignal.setSubscription(true);
@@ -94,7 +109,9 @@ public class DriverLoginActivity extends AppCompatActivity {
                             OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
                                 @Override
                                 public void idsAvailable(String userId, String registrationId) {
-                                    FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(FirebaseAuth.getInstance().getUid()).child("notificationKey").setValue(userId);
+                                    //set notification key fro user details
+                                    FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers")
+                                            .child(FirebaseAuth.getInstance().getUid()).child("notificationKey").setValue(userId);
                                 }
                             });
                             OneSignal.setInFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification);
@@ -121,7 +138,8 @@ public class DriverLoginActivity extends AppCompatActivity {
 
                         if (!task.isSuccessful()) {
 
-                            Toasty.error(DriverLoginActivity.this, "Login Error", Toast.LENGTH_SHORT).show();
+                            String ErrorMessage=task.getException().getMessage();
+                            Toasty.error(DriverLoginActivity.this, "Error Occurred While Login:"+ErrorMessage, Toast.LENGTH_SHORT, true).show();
                         } else if (task.isSuccessful()) {
                             String currentUserId = mAuth.getCurrentUser().getUid();
                             String deviceToken = FirebaseInstanceId.getInstance().getToken();
@@ -142,7 +160,8 @@ public class DriverLoginActivity extends AppCompatActivity {
                             OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
                                 @Override
                                 public void idsAvailable(String userId, String registrationId) {
-                                    FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(FirebaseAuth.getInstance().getUid()).child("notificationKey").setValue(userId);
+                                    FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers")
+                                            .child(FirebaseAuth.getInstance().getUid()).child("notificationKey").setValue(userId);
                                 }
                             });
                             OneSignal.setInFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification);
@@ -174,6 +193,7 @@ public class DriverLoginActivity extends AppCompatActivity {
         mEmail.setErrorEnabled(false);
         return true;
     }
+
 
     private boolean validatePassword(){
         final String password=mPassord.getEditText().getText().toString();

@@ -20,8 +20,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ContatctUSActivity"></activity>
-        <activity android:name=".MyAdsDetailsActivity" />
+        <activity android:name=".AdminConfirmationActivity"></activity>
+        <activity android:name=".UserCreartionActivity" />
+        <activity android:name=".ChangePasswordActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -34,6 +35,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity
+            android:name=".AdminMapActivity"
+            android:label="@string/title_activity_admin_map" />
+        <activity android:name=".MailReadActivity" />
+        <activity android:name=".AdminPanelActivity" />
+        <activity android:name=".ContatctUSActivity" />
+        <activity android:name=".MyAdsDetailsActivity" />
         <activity
             android:name=".MyAdsMapActivity"
             android:label="@string/title_activity_my_ads_map" />

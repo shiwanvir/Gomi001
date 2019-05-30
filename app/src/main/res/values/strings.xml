@@ -10,6 +10,9 @@
     <string name="from_camera">Camera</string>
     <string name="price">Price</string>
     <string name="submit">Submit</string>
+    <string name="create">Create</string>
+    <string name="send">Send</string>
+    <string name="confrim">confirm</string>
     <string name="location">Location</string>
     <string-array name="names">
         <item>[Select One]</item>>
@@ -42,10 +45,11 @@
     <string name="adCancelPoppContent">Your Advertisement Booking Canceled..</string>
 
     <!---waste picked popup-->
-     <string name="wastePickPoppHeader">Waste Picked!</string>
+    <string name="wastePickPoppHeader">Waste Picked!</string>
     <string name="wastePickPoppContent">Your Waste Picked By Truck..</string>
 
     <!---Delete ad Confirmation popup-->
     <string name="deleteAdConfirmationPoppHeader">Are You Sure!</string>
     <string name="deleteAdConfirmationPoppContent">You want to Remove this Adverisment?</string>
+    <string name="title_activity_admin_map">Map</string>
 </resources>

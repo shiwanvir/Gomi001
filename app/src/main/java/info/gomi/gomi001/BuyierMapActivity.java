@@ -58,6 +58,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class BuyierMapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, RoutingListener {
 
@@ -95,7 +96,11 @@ public class BuyierMapActivity extends FragmentActivity implements OnMapReadyCal
         mapFragment.getMapAsync(this);
         //popUp
 
+       // Random rLat = new Random();
+        // sellerLatitude = 7.0945808 + (7.127572 - 7.0945808) * rLat.nextDouble();
 
+        //Random rLong = new Random();
+        //sellerLongtide = 79.9715423+ (79.9772935 - 79.9715423) * rLong.nextDouble();
         //if(AdcencelationDialog==null){
 
           //  AdcencelationDialog=new Dialog(this);
@@ -108,6 +113,9 @@ public class BuyierMapActivity extends FragmentActivity implements OnMapReadyCal
         longtide = getIntent().getStringExtra("longitude");
         productName=getIntent().getStringExtra("itemName");
         //adStatus=getIntent().getStringExtra("adStatus");
+
+        Log.i("lati","latitide"+latitide);
+        Log.i("longi","longitude"+longtide);
         sellerLatitude = Double.parseDouble(latitide);
         sellerLongtide = Double.parseDouble(longtide);
         buyerStartJourny=findViewById(R.id.start_buyer_journey);
@@ -131,25 +139,7 @@ public class BuyierMapActivity extends FragmentActivity implements OnMapReadyCal
                     DatabaseReference refForSeller=ref.child("post_ad_details").child(adId );
                     refForSeller.child("buyerId").setValue(buyierId);
                     refForSeller.child("adStatus").setValue("Booked");
-                    //refForSeller.setValue(true);
-                //final String bookedaddId=refForSeller.push().getKey();
-                //BookedAdDetails bookedAdDetails=new BookedAdDetails(userId,adId,buyierId);
-                //refForSeller.child(bookedaddId).setValue(bookedAdDetails);
 
-               /* HashMap<String,String>bookNotification=new HashMap<>();
-                bookNotification.put("from",buyierId);
-                bookNotification.put("type","booking");
-                notificationRef.child(userId).push()
-                        .setValue(bookNotification)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                               if(task.isSuccessful()){
-
-                                   //write some thing
-                               }
-                            }
-                        });*/
                //get notification key of seller
                 DatabaseReference  notiref= FirebaseDatabase.getInstance().getReference();
                 DatabaseReference senNotificationToseller=notiref.child("Users").child("Customers").child(userId).child("notificationKey");
@@ -325,7 +315,8 @@ public class BuyierMapActivity extends FragmentActivity implements OnMapReadyCal
 
                                 mBuyerMaker.remove();
                             }
-                            mBuyerMaker=mMap.addMarker(new MarkerOptions().position(buyerLatLng).title("Buyer").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_action_buyer)));
+                            mBuyerMaker=mMap.addMarker(new MarkerOptions().position(buyerLatLng).title("Buyer").
+                                    icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_action_buyer)));
                         }
 
                     }

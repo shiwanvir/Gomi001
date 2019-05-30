@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Home"
+
+        />
+
+
+    <item
+        android:id="@+id/nav_mails"
+        android:icon="@drawable/ic_message_black_24dp"
+        android:title="Messages"
+        />
+
+
+    <item
+        android:id="@+id/nav_userCreation"
+        android:icon="@drawable/ic_user"
+        android:title="Create User"
+        />
+
+    <item
+        android:id="@+id/nav_map"
+        android:icon="@drawable/ic_location_on_black_24dp"
+        android:title="Map"
+        />
+
+
+</menu>

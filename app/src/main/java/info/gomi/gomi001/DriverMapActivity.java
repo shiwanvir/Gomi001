@@ -279,18 +279,14 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
                if(minDistance>distance){
                     minDistance=distance;
                     nearestUserId=key;
-                  // nLocation.setLongitude(wateLocatrion.latitude);
-                   //nLocation.setLongitude(wateLocatrion.longitude);
-                   nearstDumpedLocation=new LatLng(dumPoint.getLatitude(),dumPoint.getLongitude());
+                    nearstDumpedLocation=new LatLng(dumPoint.getLatitude(),dumPoint.getLongitude());
                    //nearstDumpedLocation=dumPoint;
                 }
                 else{
 
                     minDistance=minDistance;
                     nearestUserId=nearestUserId;
-                   //nearstDumpedLocation.setLongitude(wateLocatrion.latitude);
-                   //nearstDumpedLocation.setLongitude(wateLocatrion.longitude);
-                   nearstDumpedLocation=new LatLng(nearstDumpedLocation.latitude,nearstDumpedLocation.longitude);
+                    nearstDumpedLocation=new LatLng(nearstDumpedLocation.latitude,nearstDumpedLocation.longitude);
                 }
                 Log.i("Distance", "Distance" + distance);
                 Log.i(" Min Distance", "Min Distance" + minDistance);
@@ -426,6 +422,7 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
                     }
                     //driVerLatLong
                     mDriverMaker=mMap.addMarker(new MarkerOptions().position(driVerLatLong).title("Truck Driver").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_truck_image)));
+
                 }
             }
 

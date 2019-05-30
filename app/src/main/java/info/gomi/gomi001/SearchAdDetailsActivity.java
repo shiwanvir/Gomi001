@@ -96,7 +96,7 @@ public class SearchAdDetailsActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(view.getContext(), BuyierMapActivity.class);
                     //ByteArrayOutputStream stream=new ByteArrayOutputStream();
-                    intent.putExtra("userId", userId);
+                    intent.putExtra("userId" ,userId);
                     intent.putExtra("adId", adId);
                     intent.putExtra("latitude", latitide);
                     intent.putExtra("longitude", longtide);

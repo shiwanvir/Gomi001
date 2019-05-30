@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     android:fitsSystemWindows="true"
-    tools:context=".ProfileActivity">
+    tools:context=".UserCreartionActivity">
 
 
 
@@ -47,10 +47,32 @@
                     android:id="@+id/editTextuserName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="your Name"
+                    android:hint="Driver Name"
                     android:textSize="20sp"
                     android:textColor="#fff"
                     android:inputType="text"
+
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditTextHint"
+                android:id="@+id/user_email"
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="50"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/editTextUserEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="user Email"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:inputType="textEmailAddress"
 
                     />
 
@@ -77,6 +99,44 @@
                     android:inputType="phone"/>
             </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditTextHint"
+                android:id="@+id/password"
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="10">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/editTextPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:inputType="textPassword"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditTextHint"
+                android:id="@+id/reEnterPassword"
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="10">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/ediTextReEnterPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Re-Enter password"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:inputType="textPassword"/>
+            </android.support.design.widget.TextInputLayout>
+
 
 
 
@@ -94,7 +154,7 @@
                     android:textSize="12sp"
                     android:textAllCaps="true"
                     android:layout_marginBottom="10dp"
-                    android:text="@string/submit"
+                    android:text="@string/create"
                     android:textColor="@android:color/white"
                     android:layout_marginRight="10dp"/>
 
@@ -119,4 +179,5 @@
 
         </LinearLayout>
     </ScrollView>
+
 </android.support.design.widget.CoordinatorLayout>

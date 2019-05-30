@@ -8,7 +8,7 @@ public class ContactUsModel {
 
 
     String subject;
-    String phoneNo;
+    String cusPhoneNo;
     String message;
 
 
@@ -16,7 +16,7 @@ public class ContactUsModel {
         this.email = email;
         this.userId = userId;
         this.subject = subject;
-        this.phoneNo = phoneNo;
+        this.cusPhoneNo = phoneNo;
         this.message = message;
     }
 
@@ -26,7 +26,7 @@ public class ContactUsModel {
     public ContactUsModel(String email, String subject, String phoneNo, String message) {
         this.email = email;
         this.subject = subject;
-        this.phoneNo = phoneNo;
+        this.cusPhoneNo = phoneNo;
         this.message = message;
     }
     public String getUserId() {
@@ -54,11 +54,11 @@ public class ContactUsModel {
     }
 
     public String getPhoneNo() {
-        return phoneNo;
+        return cusPhoneNo;
     }
 
     public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
+        this.cusPhoneNo = phoneNo;
     }
 
     public String getMessage() {

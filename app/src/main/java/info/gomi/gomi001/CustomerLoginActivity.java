@@ -18,10 +18,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.onesignal.OneSignal;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
@@ -33,6 +39,9 @@ public class CustomerLoginActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
     private ProgressDialog progressDialog;
     private DatabaseReference deviceTokenRef;
+    private DatabaseReference userStatusRef;
+
+    private  String userStatus=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +53,13 @@ public class CustomerLoginActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-                if(user!=null){
+                  //check user have loged
+                  if(user!=null){
+                      Intent intent=new Intent(CustomerLoginActivity.this,HomeActivity.class);
+                      startActivity(intent);
+                      finish();
+                      return;
 
-                    Intent intent=new Intent(CustomerLoginActivity.this,HomeActivity.class);
-                    startActivity(intent);
-                    finish();
-                    return;
                 }
 
             }
@@ -74,11 +84,15 @@ public class CustomerLoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
 
-                            Toasty.error(CustomerLoginActivity.this, "Sign Up Error", Toast.LENGTH_SHORT).show();
+                            String ErrorMessage=task.getException().getMessage();
+                            Toasty.error(CustomerLoginActivity.this, "Error Occurred While Registering:"+ErrorMessage, Toast.LENGTH_SHORT, true).show();
                         } else if (task.isSuccessful()) {
                             String userId = mAuth.getCurrentUser().getUid();
                             DatabaseReference DbRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(userId);
                             DbRef.setValue(true);
+                            Map userRole=new HashMap();
+                            userRole.put("userRole","cust");
+                            DbRef.updateChildren(userRole);
                             //String currentUserId=mAuth.getCurrentUser().getUid();
                             String deviceToken= FirebaseInstanceId.getInstance().getToken();
                             deviceTokenRef.child(userId).child("device_token")
@@ -87,6 +101,11 @@ public class CustomerLoginActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
                                         //
+                                    }
+                                    else{
+                                       // String ErrorMessage=task.getException().getMessage();
+                                        //Toasty.error(CustomerLoginActivity.this, "Error Occurred While Processing:"+ErrorMessage, Toast.LENGTH_SHORT, true).show();
+
                                     }
                                 }
                             });
@@ -128,8 +147,10 @@ public class CustomerLoginActivity extends AppCompatActivity {
 
                         if (!task.isSuccessful()) {
 
+                                String ErrorMessage=task.getException().getMessage();
+                                Toasty.error(CustomerLoginActivity.this, "Error Occurred While Login:"+ErrorMessage, Toast.LENGTH_SHORT, true).show();
 
-                            Toasty.error(CustomerLoginActivity.this, "Login Error", Toast.LENGTH_SHORT).show();
+
                         } else if (task.isSuccessful()) {
                             String currentUserId = mAuth.getCurrentUser().getUid();
                             String deviceToken = FirebaseInstanceId.getInstance().getToken();

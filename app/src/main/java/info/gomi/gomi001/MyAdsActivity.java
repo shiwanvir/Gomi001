@@ -159,7 +159,7 @@ public class MyAdsActivity extends AppCompatActivity {
 
                                 //phrase data to new activity
 
-                                Intent intent =new Intent(view.getContext(),SearchAdDetailsActivity.class);
+                                Intent intent =new Intent(view.getContext(),MyAdsDetailsActivity.class);
                                 ByteArrayOutputStream stream=new ByteArrayOutputStream();
                                 mBitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
                                 byte[] bytes=stream.toByteArray();

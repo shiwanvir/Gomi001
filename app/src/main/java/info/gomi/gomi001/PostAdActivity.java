@@ -16,6 +16,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -89,12 +90,17 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_ad);
+        //action bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Post Advertisement");
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         //Firebase stoage int
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         //LatLng wateLocatrion =new LatLng(location.latitude,location.longitude);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             return;
         }
@@ -132,7 +138,7 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
                     addDetails();
                 }
                 else{
-                   errorMessage();
+                    errorMessage();
                 }
             }
 
@@ -328,32 +334,12 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
       String addStatus="available";
       String buyerId="null";
       String search=itemtype.toLowerCase();
-      PostAdDetails adDetails=new PostAdDetails(userId,addId,userName,phoneNO,item,itemtype,itemprice,imagepath,latitude,longitude,addStatus,search,buyerId);
+      PostAdDetails adDetails=
+              new PostAdDetails(userId,addId,userName,phoneNO,item,itemtype,itemprice,imagepath,latitude,longitude,addStatus,search,buyerId);
 
         saveDeatils.child(addId).setValue(adDetails);
         if(imageUri!=null){
-               /* final ProgressDialog progressDialog=new ProgressDialog(this);
-            StorageReference ref=storageReference.child("images/"+ addId);
-            ref.putFile(imageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(PostAdActivity.this,"Ad. posted Sucessfully..",Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(PostAdActivity.this,"Ad. posted faild..",Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress=(100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                            progressDialog.setMessage("upload.."+(int)progress+"%");
-                        }
-                    });*/
+
 
             final StorageReference filepath=FirebaseStorage.getInstance().getReference().child("images").child(addId);
             Bitmap bitmap=null;
@@ -377,15 +363,11 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
                             newImage.put("adImageUrl", uri.toString());
                             saveDeatils.child(addId).updateChildren(newImage);
 
-                            //Toast.makeText(this,"Ad posted Sucessfully....",Toast.LENGTH_LONG).show();
-                            //finish();
-                            //return;
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
-                            //finish();
-                            //return;
+
                         }
                     });
                 }
@@ -424,7 +406,8 @@ public class PostAdActivity extends AppCompatActivity implements View.OnClickLis
             photoFile=createPhotoFile();
             if(photoFile!=null ) {
                  pathToFile = photoFile.getAbsolutePath();
-                Uri photoURI= FileProvider.getUriForFile(PostAdActivity.this,"info.gomi.gomi001.fileprovider",photoFile);
+                Uri photoURI= FileProvider.
+                        getUriForFile(PostAdActivity.this,"info.gomi.gomi001.fileprovider",photoFile);
                 imageUri=photoURI;
                 takePic.putExtra(MediaStore.EXTRA_OUTPUT,photoURI);
                 startActivityForResult(takePic,1);
